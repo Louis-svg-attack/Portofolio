@@ -3,30 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Louis | Cosmic Explorer & Cybersecurity Enthusiast</title>
-  <meta name="description" content="Portfolio eksplorasi kosmik Louis — Pelajar, Pengembang Web & Cybersecurity / Bug Hunter. Penghargaan, sertifikasi, dan pencapaian digital.">
+  <title>M. Louis Stevano Gunawan | Cosmic Security & Full-Stack Architecture</title>
+  <meta name="description" content="Portfolio eksplorasi kosmik M. Louis Stevano Gunawan — Penetration Tester, Cybersecurity Enthusiast & Modern Web Developer.">
   <meta name="theme-color" content="#000000">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300f0ff'/%3E%3Cstop offset='100%25' stop-color='%237b2ff7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M18 46V18h8l8 15 8-15h8v28h-6.5V29l-7 13h-5l-7-13v17z' fill='%23FFFFFF'/%3E%3Ccircle cx='49' cy='46' r='3.5' fill='%2300f0ff'/%3E%3C/svg%3E">
 
   <style>
     /* ==========================================================================
-       0. CSS RESET & VARIABLES
+       0. CSS RESET & COSMIC DESIGN TOKENS (MACBOOK AESTHETIC)
        ========================================================================== */
     :root {
       --bg-space: #000000;
-      --bg-space-end: #0a0a2e;
+      --bg-deep: #0a0a2e;
       --color-white: #ffffff;
       --color-text-secondary: rgba(255, 255, 255, 0.75);
       --color-text-muted: rgba(255, 255, 255, 0.45);
-      --color-border: rgba(255, 255, 255, 0.08);
-      --color-border-glow: rgba(0, 240, 255, 0.3);
-      --color-card-bg: rgba(255, 255, 255, 0.025);
       
+      --color-border: rgba(255, 255, 255, 0.08);
+      --color-border-glow: rgba(0, 240, 255, 0.35);
+      --color-card-bg: rgba(255, 255, 255, 0.028);
+
       --accent-cyan: #00f0ff;
       --accent-cyan-light: #5AC8FA;
       --accent-purple: #7b2ff7;
       --accent-purple-light: #BF5AF2;
       --accent-pink: #FF375F;
       --accent-gold: #FFD60A;
+      --accent-green: #34C759;
 
       --font-mac: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, Consolas, monospace;
@@ -75,10 +80,19 @@
       background: linear-gradient(180deg, #fff, var(--accent-pink));
     }
 
-    /* Selection */
     ::selection {
-      background: rgba(0, 240, 255, 0.25);
+      background: rgba(0, 240, 255, 0.3);
       color: #ffffff;
+    }
+
+    /* Containers */
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 10;
     }
 
     /* ==========================================================================
@@ -140,9 +154,6 @@
       align-items: center;
       gap: 0.5rem;
     }
-    .loading-text span {
-      animation: textBlink 1.5s infinite;
-    }
 
     @keyframes spinRing {
       0% { transform: rotateX(75deg) rotateY(-15deg) rotate(0deg); }
@@ -152,14 +163,8 @@
       0% { transform: scale(0.95); box-shadow: 0 0 20px rgba(0, 240, 255, 0.4); }
       100% { transform: scale(1.05); box-shadow: 0 0 40px rgba(0, 240, 255, 0.8); }
     }
-    @keyframes textBlink {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
-    }
 
-    /* ==========================================================================
-       2. SCROLL PROGRESS & CANVAS LAYERS
-       ========================================================================== */
+    /* Scroll progress bar */
     #scroll-progress {
       position: fixed;
       top: 0;
@@ -172,7 +177,7 @@
       transition: width 0.1s linear;
     }
 
-    /* Cursor Trail Canvas */
+    /* Canvas Cursor Trail */
     #cursor-canvas {
       position: fixed;
       inset: 0;
@@ -181,7 +186,7 @@
     }
 
     /* ==========================================================================
-       3. COSMIC UNIVERSE BACKGROUND LAYERS
+       2. COSMIC UNIVERSE MULTI-LAYERS
        ========================================================================== */
     .cosmic-layer-container {
       position: fixed;
@@ -191,14 +196,14 @@
       contain: strict;
     }
 
-    /* Layer 1: Static and Twinkling Stars (Canvas for max performance) */
+    /* Layer 1: Static and Twinkling Stars */
     #stars-canvas {
       position: absolute;
       inset: 0;
       z-index: -5;
     }
 
-    /* Layer 2: Shooting Stars (JS generated inside this layer) */
+    /* Layer 2: Shooting Stars */
     .shooting-stars-layer {
       position: absolute;
       inset: 0;
@@ -206,11 +211,11 @@
     }
     .shooting-star {
       position: absolute;
-      width: 150px;
+      width: 160px;
       height: 2px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(0, 240, 255, 0.8) 30%, transparent 100%);
+      background: linear-gradient(90deg, #ffffff 0%, rgba(0, 240, 255, 0.85) 30%, transparent 100%);
       transform: rotate(-45deg);
-      filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.9));
+      filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.9));
       opacity: 0;
       pointer-events: none;
       will-change: transform, opacity;
@@ -286,12 +291,11 @@
       will-change: transform;
       animation: floatPlanet 25s ease-in-out infinite alternate;
     }
-    /* Planet 1 (Saturn-like with ring) */
     .planet-purple {
       top: 12%;
       right: 12%;
-      width: 46px;
-      height: 46px;
+      width: 48px;
+      height: 48px;
       background: radial-gradient(circle at 30% 30%, #bf5af2, #390066 80%, #000);
       box-shadow: 0 0 20px rgba(191, 90, 242, 0.4);
     }
@@ -300,21 +304,20 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 82px;
-      height: 20px;
-      margin-left: -41px;
-      margin-top: -10px;
+      width: 86px;
+      height: 22px;
+      margin-left: -43px;
+      margin-top: -11px;
       border: 3px solid rgba(191, 90, 242, 0.6);
       border-radius: 50%;
       transform: rotate(-25deg);
       box-shadow: 0 0 8px rgba(191, 90, 242, 0.3);
     }
-    /* Planet 2 (Cyan with crater) */
     .planet-cyan {
-      bottom: 18%;
+      bottom: 20%;
       left: 6%;
-      width: 68px;
-      height: 68px;
+      width: 72px;
+      height: 72px;
       background: radial-gradient(circle at 35% 35%, #5ac8fa 0%, #003666 75%, #000);
       box-shadow: 0 0 25px rgba(90, 200, 250, 0.35);
       animation-duration: 32s;
@@ -324,14 +327,13 @@
       content: '';
       position: absolute;
       top: 18px;
-      left: 20px;
+      left: 22px;
       width: 14px;
       height: 14px;
       border-radius: 50%;
       background: rgba(0, 20, 50, 0.6);
       box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.3);
     }
-
     @keyframes floatPlanet {
       0% { transform: translateY(0) rotate(0deg); }
       100% { transform: translateY(-40px) rotate(15deg); }
@@ -340,7 +342,7 @@
     /* Layer 5: Galaxy Spiral */
     .galaxy-layer {
       position: absolute;
-      top: 45%;
+      top: 48%;
       left: 50%;
       width: 650px;
       height: 650px;
@@ -350,31 +352,16 @@
       background: radial-gradient(circle, rgba(123, 47, 247, 0.12) 0%, rgba(0, 240, 255, 0.08) 40%, rgba(0, 0, 0, 0) 70%);
       filter: blur(15px);
       z-index: -1;
-      opacity: 0.14;
+      opacity: 0.15;
       animation: rotateGalaxy 75s linear infinite;
       pointer-events: none;
-    }
-    .galaxy-spiral-arm {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 2px dashed rgba(0, 240, 255, 0.3);
-      transform: scale(0.8) rotate(45deg);
     }
     @keyframes rotateGalaxy {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
 
-    /* Layer 6: Meteors shower container */
-    #meteor-shower-layer {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* Aurora Borealis Effect at top */
+    /* Aurora Wave */
     .aurora-wave {
       position: absolute;
       top: -80px;
@@ -394,32 +381,22 @@
       100% { transform: scaleY(1.0) skewX(-2deg); opacity: 0.06; }
     }
 
-    /* Black Hole Vortex */
-    .black-hole {
+    /* Asteroids & Satellite */
+    .asteroid {
       position: absolute;
-      bottom: 5%;
-      right: 4%;
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #000 35%, rgba(123, 47, 247, 0.3) 65%, transparent 80%);
-      box-shadow: 0 0 35px rgba(123, 47, 247, 0.25);
-      filter: blur(1px);
+      background: linear-gradient(135deg, #555, #222);
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
       opacity: 0.25;
-      animation: rotateGalaxy 20s linear infinite reverse;
       z-index: -2;
       pointer-events: none;
+      animation: floatAsteroid 22s linear infinite;
     }
-    .black-hole::after {
-      content: '';
-      position: absolute;
-      inset: -6px;
-      border-radius: 50%;
-      border: 1px dashed rgba(0, 240, 255, 0.4);
-      animation: rotateGalaxy 10s linear infinite;
+    @keyframes floatAsteroid {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(45px, 25px) rotate(180deg); }
+      100% { transform: translate(0, 0) rotate(360deg); }
     }
 
-    /* Satellite Orbiting */
     .satellite {
       position: absolute;
       top: 25%;
@@ -445,7 +422,6 @@
     }
     .satellite::before { left: -12px; }
     .satellite::after { right: -12px; }
-
     @keyframes orbitSatellite {
       0% { transform: translate(0, 0) rotate(0deg); }
       25% { transform: translate(120px, 60px) rotate(90deg); }
@@ -454,7 +430,7 @@
       100% { transform: translate(0, 0) rotate(360deg); }
     }
 
-    /* Moon Phase Icon */
+    /* Interactive Moon Corner */
     .moon-corner {
       position: fixed;
       top: 24px;
@@ -465,7 +441,7 @@
       box-shadow: inset -6px 2px 0 0 #e6f1ff;
       filter: drop-shadow(0 0 10px rgba(230, 241, 255, 0.8));
       opacity: 0.75;
-      z-index: 100;
+      z-index: 1100;
       transition: transform 0.4s ease, opacity 0.4s ease;
       cursor: pointer;
     }
@@ -475,40 +451,24 @@
       filter: drop-shadow(0 0 18px var(--accent-cyan));
     }
 
-    /* Floating Asteroids */
-    .asteroid {
-      position: absolute;
-      background: linear-gradient(135deg, #555, #222);
-      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-      opacity: 0.25;
-      z-index: -2;
-      pointer-events: none;
-      animation: floatAsteroid 20s linear infinite;
-    }
-    @keyframes floatAsteroid {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      50% { transform: translate(50px, 30px) rotate(180deg); }
-      100% { transform: translate(0, 0) rotate(360deg); }
-    }
-
     /* ==========================================================================
-       4. NAVBAR (ULTRA SLEEK GLASSOID)
+       3. NAVBAR (STICKY GLASSOID)
        ========================================================================== */
-    .header-nav {
+    .navbar {
       position: fixed;
       top: 16px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 900;
+      z-index: 1000;
       width: calc(100% - 48px);
-      max-width: 860px;
+      max-width: 980px;
     }
     .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0.75rem 1.6rem;
-      background: rgba(10, 10, 30, 0.45);
+      background: rgba(8, 10, 25, 0.55);
       backdrop-filter: blur(24px) saturate(190%);
       -webkit-backdrop-filter: blur(24px) saturate(190%);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -523,7 +483,7 @@
     .nav-logo {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.7rem;
       text-decoration: none;
       color: #fff;
     }
@@ -535,7 +495,7 @@
       border: 1.5px solid var(--accent-cyan);
       box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
     }
-    .nav-brand {
+    .nav-brand-title {
       font-weight: 700;
       font-size: 0.95rem;
       letter-spacing: -0.01em;
@@ -563,6 +523,10 @@
       box-shadow: 0 0 8px var(--accent-cyan);
       animation: pulseDot 2s infinite;
     }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
     .nav-links {
       display: flex;
       align-items: center;
@@ -577,102 +541,143 @@
       transition: color 0.3s ease, text-shadow 0.3s ease;
       position: relative;
     }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 8px var(--accent-cyan);
+      transition: width 0.3s var(--ease-apple);
+    }
     .nav-link:hover {
       color: #fff;
       text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
     }
+    .nav-link:hover::after {
+      width: 100%;
+    }
 
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
+    /* Mobile Hamburger */
+    .mobile-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      padding: 6px;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 75px;
+      left: 24px;
+      right: 24px;
+      background: rgba(10, 12, 28, 0.95);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 1.5rem;
+      flex-direction: column;
+      gap: 1.2rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+    }
+    .mobile-menu.open {
+      display: flex;
+    }
+    .mobile-menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     /* ==========================================================================
-       5. HERO SECTION
+       4. HERO SECTION
        ========================================================================== */
     .hero-section {
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      text-align: center;
-      padding: 7rem 1.5rem 4rem;
+      padding: 7.5rem 0 4rem;
       position: relative;
-      z-index: 10;
     }
-    .hero-content {
-      max-width: 880px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
       align-items: center;
     }
-
-    /* Subtitle Tag */
-    .hero-badge {
+    .hero-badge-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+    .tech-pill {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--accent-cyan);
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.4rem 1.1rem;
-      border-radius: 999px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-cyan);
-      background: rgba(0, 240, 255, 0.06);
-      border: 1px solid rgba(0, 240, 255, 0.25);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: heroFadeIn 0.8s var(--ease-apple) 0.1s forwards;
+      gap: 0.4rem;
     }
-
-    /* Hero Title */
     .hero-title {
-      font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
       font-weight: 700;
-      line-height: 1.08;
-      letter-spacing: -0.035em;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(180deg, #ffffff 40%, rgba(255, 255, 255, 0.6) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--accent-cyan);
       margin-bottom: 1.4rem;
-      background: linear-gradient(180deg, #ffffff 30%, rgba(255, 255, 255, 0.55) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      opacity: 0;
-      transform: translateY(25px) scale(0.98);
-      animation: heroFadeInScale 0.9s var(--ease-apple) 0.2s forwards;
     }
-    .hero-title .glow-text {
-      background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple-light) 60%, var(--accent-pink) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+    .cli-prefix {
+      color: var(--accent-pink);
+      font-weight: 700;
     }
-
-    /* Hero Description */
-    .hero-description {
-      font-size: clamp(1rem, 2vw, 1.2rem);
+    .typewriter-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 18px;
+      background: var(--accent-cyan);
+      animation: blinkCursor 1s infinite;
+    }
+    @keyframes blinkCursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .hero-desc {
+      font-size: 1.05rem;
       color: var(--color-text-secondary);
-      max-width: 680px;
-      line-height: 1.65;
-      margin-bottom: 2.5rem;
-      font-weight: 400;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: heroFadeIn 0.8s var(--ease-apple) 0.35s forwards;
+      line-height: 1.7;
+      margin-bottom: 2.2rem;
+      max-width: 580px;
     }
-
-    /* Hero CTA & Quick Stats */
     .hero-actions {
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 3.5rem;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: heroFadeIn 0.8s var(--ease-apple) 0.45s forwards;
+      flex-wrap: wrap;
     }
     .btn-cosmic {
       display: inline-flex;
@@ -680,17 +685,17 @@
       gap: 0.6rem;
       padding: 0.85rem 1.8rem;
       border-radius: 999px;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 600;
       text-decoration: none;
       transition: all 0.4s var(--ease-apple);
       cursor: pointer;
     }
     .btn-primary {
-      background: linear-gradient(135deg, #00f0ff, #7b2ff7);
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
       color: #000;
       font-weight: 700;
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
       border: none;
     }
     .btn-primary:hover {
@@ -710,70 +715,99 @@
       box-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
     }
 
-    /* Stats Grid */
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      width: 100%;
-      max-width: 720px;
-    }
-    .stat-pill {
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(16px);
-      border-radius: 20px;
-      padding: 1.25rem 1rem;
+    /* Hero Right: Profile Frame & Floating Badges */
+    .profile-card-wrapper {
+      position: relative;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      transition: all 0.4s var(--ease-apple);
-      opacity: 0;
-      transform: translateY(25px);
+      align-items: center;
     }
-    .stat-pill:nth-child(1) { animation: heroFadeIn 0.8s var(--ease-apple) 0.5s forwards; }
-    .stat-pill:nth-child(2) { animation: heroFadeIn 0.8s var(--ease-apple) 0.6s forwards; }
-    .stat-pill:nth-child(3) { animation: heroFadeIn 0.8s var(--ease-apple) 0.7s forwards; }
-
-    .stat-pill:hover {
-      transform: translateY(-5px);
-      border-color: rgba(0, 240, 255, 0.3);
-      box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.2);
-      background: rgba(255, 255, 255, 0.04);
+    .profile-frame {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 4/5;
+      border-radius: 28px;
+      padding: 8px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.15) 0%, rgba(0, 240, 255, 0.2) 50%, rgba(123, 47, 247, 0.1) 100%);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 240, 255, 0.15);
+      position: relative;
+      overflow: hidden;
     }
-    .stat-num {
-      font-size: 1.8rem;
+    .profile-frame-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #050510;
+    }
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.95) contrast(1.05);
+      transition: transform 0.6s var(--ease-apple);
+    }
+    .profile-frame:hover .profile-img {
+      transform: scale(1.05);
+    }
+    .floating-top-badge {
+      position: absolute;
+      top: -20px;
+      right: -10px;
+      background: rgba(10, 10, 30, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 16px;
+      padding: 0.75rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      animation: floatBadge 5s ease-in-out infinite alternate;
+      z-index: 20;
+    }
+    .floating-stat-card {
+      position: absolute;
+      bottom: -24px;
+      left: -20px;
+      background: rgba(10, 10, 30, 0.88);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(191, 90, 242, 0.35);
+      border-radius: 18px;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+      animation: floatBadge 6s ease-in-out infinite alternate-reverse;
+      z-index: 20;
+    }
+    .floating-stat-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .floating-stat-icon {
+      font-size: 1.25rem;
+    }
+    .floating-stat-number {
       font-weight: 700;
-      font-family: var(--font-mono);
-      background: linear-gradient(135deg, #fff, var(--accent-cyan));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 0.2rem;
+      font-size: 0.95rem;
+      color: #fff;
     }
-    .stat-label {
-      font-size: 0.78rem;
+    .floating-stat-label {
+      font-size: 0.75rem;
       color: var(--color-text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-family: var(--font-mac);
+      font-family: var(--font-mono);
+    }
+    @keyframes floatBadge {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-12px); }
     }
 
-    @keyframes heroFadeIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes heroFadeInScale {
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    /* ==========================================================================
-       6. SECTION DIVIDER (COSMIC STARLINE)
-       ========================================================================== */
+    /* Cosmic Starline Divider */
     .cosmic-divider {
       position: relative;
       width: 100%;
-      max-width: 900px;
-      margin: 2rem auto;
+      max-width: 960px;
+      margin: 4rem auto;
       height: 1px;
       background: linear-gradient(90deg, transparent 0%, rgba(0, 240, 255, 0.3) 30%, rgba(191, 90, 242, 0.5) 50%, rgba(0, 240, 255, 0.3) 70%, transparent 100%);
       display: flex;
@@ -790,20 +824,13 @@
     }
 
     /* ==========================================================================
-       7. TIMELINE & CARDS SECTION
+       5. GENERAL SECTION STYLING & HEADERS
        ========================================================================== */
-    .section-container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 4rem 1.5rem 8rem;
+    .section-wrap {
+      padding: 4.5rem 0;
       position: relative;
-      z-index: 10;
     }
-    .section-header {
-      text-align: center;
-      margin-bottom: 4.5rem;
-    }
-    .section-badge {
+    .section-tag {
       display: inline-block;
       font-family: var(--font-mono);
       font-size: 0.75rem;
@@ -814,13 +841,13 @@
       border: 1px solid rgba(191, 90, 242, 0.25);
       padding: 0.35rem 1rem;
       border-radius: 999px;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
     }
     .section-title {
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
       font-weight: 700;
       letter-spacing: -0.025em;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.8rem;
       background: linear-gradient(135deg, #ffffff 40%, rgba(255, 255, 255, 0.6) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -828,24 +855,236 @@
     .section-subtitle {
       font-size: 1rem;
       color: var(--color-text-secondary);
-      max-width: 580px;
-      margin: 0 auto;
+      max-width: 620px;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
     }
 
-    /* Timeline Wrapper */
+    /* ==========================================================================
+       6. ABOUT SECTION (2 COLUMNS + COSMIC CONSTELLATION FEEL)
+       ========================================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    .about-card {
+      background: rgba(255, 255, 255, 0.028);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-radius: 24px;
+      padding: 2.5rem;
+      transition: transform 0.4s var(--ease-apple), border-color 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle at top right, rgba(0, 240, 255, 0.08), transparent 70%);
+      pointer-events: none;
+    }
+    .about-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 240, 255, 0.3);
+      box-shadow: 0 15px 40px rgba(0, 240, 255, 0.15);
+    }
+    .about-card-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    .about-card-text {
+      font-size: 0.96rem;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+    }
+    .about-card-text strong {
+      color: var(--accent-cyan);
+    }
+
+    /* ==========================================================================
+       7. ARSENAL (SKILLS, TOOLS, LANGUAGES BENTO GRID)
+       ========================================================================== */
+    .arsenal-filters {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--color-text-secondary);
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: var(--accent-cyan);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+    }
+
+    .bento-master-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .bento-col-2 {
+      grid-column: span 2;
+    }
+    .bento-card {
+      background: rgba(255, 255, 255, 0.028);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 20px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease-apple), border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .bento-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 240, 255, 0.35);
+      box-shadow: 0 15px 40px rgba(0, 240, 255, 0.15), 0 0 25px rgba(123, 47, 247, 0.1);
+    }
+    .bento-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .skill-icon-wrapper {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+    }
+    .skill-icon-wrapper svg {
+      width: 100%;
+      height: 100%;
+    }
+    .skill-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .tag-offensive {
+      color: var(--accent-cyan);
+      border-color: rgba(0, 240, 255, 0.3);
+      background: rgba(0, 240, 255, 0.08);
+    }
+    .tag-web {
+      color: var(--accent-purple-light);
+      border-color: rgba(191, 90, 242, 0.3);
+      background: rgba(191, 90, 242, 0.08);
+    }
+    .tag-stat {
+      color: var(--accent-gold);
+      border-color: rgba(255, 214, 10, 0.3);
+      background: rgba(255, 214, 10, 0.08);
+    }
+
+    .skill-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: #fff;
+    }
+    .skill-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Progress bar */
+    .progress-container {
+      margin-top: auto;
+    }
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      color: var(--color-text-muted);
+      margin-bottom: 0.35rem;
+    }
+    .progress-bar-bg {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+      border-radius: 999px;
+      width: 0%;
+      transition: width 1s var(--ease-apple);
+    }
+
+    /* Stat Cards */
+    .bento-stat-card {
+      justify-content: center;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .bento-stat-number {
+      font-size: 2.6rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      background: linear-gradient(135deg, #fff 0%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0.5rem 0;
+    }
+    .bento-stat-label {
+      font-size: 0.8rem;
+      color: var(--color-text-secondary);
+    }
+
+    /* ==========================================================================
+       8. TIMELINE & ACHIEVEMENTS SECTION (FIXED CARDS SWAP)
+       ========================================================================== */
     .timeline-wrapper {
       position: relative;
       padding-left: 2.8rem;
     }
-
-    /* Vertical Line with dynamic draw */
     .timeline-line-bg {
       position: absolute;
       top: 20px;
       bottom: 20px;
       left: 11px;
       width: 2px;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.06);
       border-radius: 999px;
     }
     .timeline-line-progress {
@@ -859,21 +1098,17 @@
       border-radius: 999px;
       transition: height 0.6s var(--ease-apple);
     }
-
-    /* Timeline Item */
     .timeline-item {
       position: relative;
       margin-bottom: 3.5rem;
       opacity: 0;
-      transform: translateY(35px);
+      transform: translateY(30px);
       transition: opacity 0.8s var(--ease-apple), transform 0.8s var(--ease-apple);
     }
     .timeline-item.in-view {
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* Timeline Dot Node */
     .timeline-node {
       position: absolute;
       left: -2.8rem;
@@ -898,13 +1133,10 @@
     .dot-cyan { color: var(--accent-cyan-light); background: var(--accent-cyan-light); }
 
     @keyframes pulseDotOrbit {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2), 0 0 10px currentColor; }
+      0%, 100% { transform: scale(1); }
       50% { transform: scale(1.25); box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.1), 0 0 20px currentColor; }
     }
 
-    /* ==========================================================================
-       8. COSMIC GLASS CARDS
-       ========================================================================== */
     .cosmic-card {
       background: rgba(255, 255, 255, 0.028);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -916,36 +1148,17 @@
       overflow: hidden;
       transition: transform 0.5s var(--ease-apple), border-color 0.5s var(--ease-apple), box-shadow 0.5s var(--ease-apple);
     }
-    /* Inner subtle corner glow */
-    .cosmic-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 280px;
-      height: 280px;
-      background: radial-gradient(circle at top right, rgba(0, 240, 255, 0.08), transparent 70%);
-      pointer-events: none;
-      transition: opacity 0.5s ease;
-      opacity: 0.5;
-    }
     .cosmic-card:hover {
       transform: translateY(-8px);
       border-color: rgba(0, 240, 255, 0.35);
       box-shadow: 0 20px 60px -20px rgba(0, 240, 255, 0.25), 0 0 40px rgba(123, 47, 247, 0.15);
     }
-    .cosmic-card:hover::before {
-      opacity: 1;
-    }
-
-    /* Card Content Layout */
     .card-grid {
       display: grid;
       grid-template-columns: 1fr 300px;
       gap: 2.2rem;
       align-items: center;
     }
-
     .card-meta-row {
       display: flex;
       align-items: center;
@@ -954,8 +1167,6 @@
       gap: 0.75rem;
       margin-bottom: 1.25rem;
     }
-
-    /* Badges */
     .badge-pill {
       font-family: var(--font-mono);
       font-size: 0.72rem;
@@ -964,7 +1175,6 @@
       text-transform: uppercase;
       padding: 0.35rem 0.9rem;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
       border: 1px solid currentColor;
       display: inline-flex;
       align-items: center;
@@ -988,27 +1198,18 @@
       background: rgba(90, 200, 250, 0.08);
       box-shadow: 0 0 15px rgba(90, 200, 250, 0.15);
     }
-
     .card-date {
       font-family: var(--font-mono);
       font-size: 0.78rem;
       color: var(--color-text-muted);
     }
-
     .card-title {
       font-size: 1.55rem;
       font-weight: 700;
       line-height: 1.2;
-      letter-spacing: -0.02em;
       margin-bottom: 0.6rem;
-      color: #ffffff;
-      transition: color 0.3s ease;
+      color: #fff;
     }
-    .cosmic-card:hover .card-title {
-      color: #e2f8ff;
-      text-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
-    }
-
     .card-issuer {
       display: flex;
       align-items: center;
@@ -1016,21 +1217,13 @@
       font-size: 0.88rem;
       color: var(--accent-cyan);
       margin-bottom: 1rem;
-      font-family: var(--font-mac);
       font-weight: 500;
     }
-
     .card-desc {
       font-size: 0.92rem;
       color: var(--color-text-secondary);
       line-height: 1.6;
       margin-bottom: 1.5rem;
-    }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
     }
     .btn-inspect {
       display: inline-flex;
@@ -1039,8 +1232,7 @@
       font-size: 0.84rem;
       font-weight: 600;
       font-family: var(--font-mono);
-      color: #ffffff;
-      text-decoration: none;
+      color: #fff;
       padding: 0.5rem 1rem;
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.05);
@@ -1055,8 +1247,6 @@
       box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
       transform: translateX(3px);
     }
-
-    /* Thumbnail image container */
     .card-preview {
       position: relative;
       width: 100%;
@@ -1078,12 +1268,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s var(--ease-apple), filter 0.6s ease;
-      filter: brightness(0.9) contrast(1.05);
+      transition: transform 0.6s var(--ease-apple);
     }
     .card-preview:hover img {
       transform: scale(1.08);
-      filter: brightness(1.05) contrast(1.1);
     }
     .card-preview-overlay {
       position: absolute;
@@ -1102,18 +1290,135 @@
       font-size: 0.75rem;
       font-family: var(--font-mono);
       color: var(--accent-cyan);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
     }
 
     /* ==========================================================================
-       9. CERTIFICATE MODAL
+       9. CONTACT SECTION
        ========================================================================== */
-    .modal-backdrop {
+    .contact-box {
+      background: rgba(255, 255, 255, 0.028);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-radius: 28px;
+      padding: 3.5rem 2.5rem;
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .contact-box:hover {
+      border-color: rgba(0, 240, 255, 0.3);
+      box-shadow: 0 20px 60px rgba(0, 240, 255, 0.15);
+    }
+    .contact-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      border-radius: 999px;
+      padding: 0.35rem 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .contact-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    .contact-desc {
+      font-size: 1.05rem;
+      color: var(--color-text-secondary);
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+    .email-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(10, 10, 30, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      padding: 0.6rem 1.4rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .email-link {
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .email-link:hover {
+      color: var(--accent-cyan);
+    }
+    .copy-btn {
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+    .copy-btn:hover {
+      background: var(--accent-cyan);
+      color: #000;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+    }
+    .social-strip {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+    }
+    .social-link svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+    .social-link:hover {
+      color: #fff;
+      border-color: rgba(0, 240, 255, 0.4);
+      background: rgba(0, 240, 255, 0.1);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    /* ==========================================================================
+       10. CERTIFICATE MODAL LIGHTBOX
+       ========================================================================== */
+    .cert-modal {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       z-index: 10000;
@@ -1125,31 +1430,44 @@
       visibility: hidden;
       transition: opacity 0.35s var(--ease-apple), visibility 0.35s var(--ease-apple);
     }
-    .modal-backdrop.active {
+    .cert-modal.active {
       opacity: 1;
       visibility: visible;
     }
-    .modal-container {
+    .modal-dialog {
       position: relative;
-      max-width: 900px;
+      max-width: 880px;
       width: 100%;
-      background: rgba(13, 15, 30, 0.95);
+      background: rgba(12, 14, 28, 0.95);
       border: 1px solid rgba(0, 240, 255, 0.3);
-      border-radius: 20px;
-      padding: 1.5rem;
+      border-radius: 24px;
+      padding: 1.8rem;
       box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8), 0 0 50px rgba(0, 240, 255, 0.2);
       transform: scale(0.95);
       transition: transform 0.35s var(--ease-apple);
     }
-    .modal-backdrop.active .modal-container {
+    .cert-modal.active .modal-dialog {
       transform: scale(1);
     }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.2rem;
+    }
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .modal-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+    }
     .modal-close-btn {
-      position: absolute;
-      top: -16px;
-      right: -16px;
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       background: #000;
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1160,49 +1478,111 @@
       cursor: pointer;
       font-size: 1.1rem;
       transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
     }
     .modal-close-btn:hover {
       background: var(--accent-pink);
       border-color: var(--accent-pink);
-      transform: rotate(90deg) scale(1.1);
+      transform: rotate(90deg);
     }
-    .modal-img-wrap {
+    .modal-img-container {
       width: 100%;
-      max-height: 75vh;
+      max-height: 60vh;
       overflow: auto;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
       background: #000;
       display: flex;
       align-items: center;
       justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 1rem;
     }
-    .modal-img-wrap img {
+    .modal-img {
       max-width: 100%;
-      max-height: 70vh;
+      max-height: 58vh;
       object-fit: contain;
-      border-radius: 8px;
+      cursor: zoom-in;
+      transition: transform 0.3s ease;
     }
-    .modal-caption {
-      margin-top: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
+    .modal-img.zoomed {
+      transform: scale(1.4);
+      cursor: zoom-out;
+    }
+    .modal-desc-box {
+      font-size: 0.9rem;
       color: var(--color-text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1rem;
+    }
+    .modal-nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      padding: 0.45rem 1rem;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.25s ease;
+    }
+    .modal-nav-btn:hover {
+      background: rgba(0, 240, 255, 0.2);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+    .modal-counter {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
     }
 
     /* ==========================================================================
-       10. BACK TO TOP BUTTON
+       11. FOOTER & BACK TO TOP
        ========================================================================== */
+    .footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, transparent 0%, rgba(5, 5, 20, 0.9) 100%);
+      padding: 4rem 0 3rem;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-left {
+      text-align: left;
+    }
+    .footer-copy {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 0.3rem;
+    }
+    .footer-tagline {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      font-family: var(--font-mono);
+    }
+
     #back-to-top {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      width: 48px;
-      height: 48px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
       background: rgba(10, 10, 30, 0.7);
       backdrop-filter: blur(16px);
@@ -1217,7 +1597,6 @@
       visibility: hidden;
       transform: translateY(20px);
       transition: all 0.4s var(--ease-apple);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
     #back-to-top.visible {
       opacity: 1;
@@ -1227,65 +1606,33 @@
     #back-to-top:hover {
       background: var(--accent-cyan);
       color: #000;
-      border-color: #fff;
       transform: translateY(-4px) scale(1.1);
       box-shadow: 0 0 25px rgba(0, 240, 255, 0.7);
     }
 
     /* ==========================================================================
-       11. FOOTER (DEEP COSMOS)
-       ========================================================================== */
-    .cosmic-footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      background: linear-gradient(180deg, transparent 0%, rgba(5, 5, 20, 0.85) 100%);
-      padding: 4rem 1.5rem 3rem;
-      text-align: center;
-      position: relative;
-      z-index: 10;
-    }
-    .footer-content {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .footer-quote {
-      font-size: 0.95rem;
-      color: var(--color-text-secondary);
-      font-style: italic;
-      margin-bottom: 1.5rem;
-    }
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 1.8rem;
-    }
-    .footer-link {
-      color: var(--color-text-muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-family: var(--font-mono);
-      transition: color 0.3s ease, text-shadow 0.3s ease;
-    }
-    .footer-link:hover {
-      color: var(--accent-cyan);
-      text-shadow: 0 0 12px var(--accent-cyan);
-    }
-    .footer-copy {
-      font-size: 0.78rem;
-      color: rgba(255, 255, 255, 0.35);
-      font-family: var(--font-mono);
-    }
-
-    /* ==========================================================================
-       12. RESPONSIVENESS & BREAKPOINTS
+       12. RESPONSIVENESS & MEDIA QUERIES
        ========================================================================== */
     @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+      }
+      .hero-desc {
+        margin: 0 auto 2.2rem;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .hero-badge-wrap {
+        justify-content: center;
+      }
+      .bento-master-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
       .card-grid {
         grid-template-columns: 1fr 240px;
-        gap: 1.8rem;
-      }
-      .cosmic-card {
-        padding: 2rem;
       }
     }
 
@@ -1293,26 +1640,17 @@
       .nav-links {
         display: none;
       }
-      .hero-section {
-        padding-top: 6rem;
+      .mobile-toggle {
+        display: block;
       }
-      .hero-title {
-        font-size: clamp(2.2rem, 8vw, 3.2rem);
-      }
-      .hero-stats {
+      .about-grid {
         grid-template-columns: 1fr;
-        gap: 0.8rem;
-        max-width: 320px;
       }
-      .stat-pill {
-        padding: 1rem;
+      .bento-master-grid {
+        grid-template-columns: 1fr;
       }
-      .timeline-wrapper {
-        padding-left: 1.8rem;
-      }
-      .timeline-node {
-        left: -1.8rem;
-        top: 1.8rem;
+      .bento-col-2 {
+        grid-column: span 1;
       }
       .card-grid {
         grid-template-columns: 1fr;
@@ -1321,27 +1659,21 @@
       .card-preview {
         height: 200px;
       }
-      .cosmic-card {
-        padding: 1.6rem;
-        border-radius: 20px;
+      .timeline-wrapper {
+        padding-left: 1.8rem;
       }
-      .planet-purple {
-        transform: scale(0.6);
-        right: 5%;
+      .timeline-node {
+        left: -1.8rem;
       }
-      .planet-cyan {
-        transform: scale(0.6);
-        left: 2%;
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
       }
-      .galaxy-layer {
-        width: 380px;
-        height: 380px;
-        margin-left: -190px;
-        margin-top: -190px;
+      .footer-left {
+        text-align: center;
       }
     }
 
-    /* Prefers-reduced-motion for Accessibility */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -1373,7 +1705,7 @@
     </div>
   </div>
 
-  <!-- Scroll Progress Bar -->
+  <!-- Top Scroll Progress Bar -->
   <div id="scroll-progress"></div>
 
   <!-- Interactive Canvas Cursor Trail -->
@@ -1390,13 +1722,13 @@
   </button>
 
   <!-- ==========================================================================
-       2. COSMIC BACKGROUND MULTI-LAYERS
+       2. COSMIC UNIVERSE MULTI-LAYERS
        ========================================================================== -->
   <div class="cosmic-layer-container">
     <!-- Layer 1: Static and Twinkling Stars (Canvas) -->
     <canvas id="stars-canvas"></canvas>
 
-    <!-- Layer 2: Shooting Stars -->
+    <!-- Layer 2: Shooting Stars Container -->
     <div class="shooting-stars-layer" id="shooting-stars-box"></div>
 
     <!-- Layer 3: Nebula Clouds -->
@@ -1414,33 +1746,27 @@
     </div>
 
     <!-- Layer 5: Galaxy Spiral -->
-    <div class="galaxy-layer">
-      <div class="galaxy-spiral-arm"></div>
-    </div>
-
-    <!-- Layer 6: Comet / Meteor Shower Layer -->
-    <div id="meteor-shower-layer"></div>
+    <div class="galaxy-layer"></div>
 
     <!-- Cosmic Additional Elements -->
     <div class="aurora-wave"></div>
-    <div class="black-hole" title="Sagittarius Deep Vortex"></div>
     <div class="satellite" title="Orbital Sentinel Alpha"></div>
 
-    <!-- Asteroid Belt items -->
-    <div class="asteroid" style="width: 14px; height: 12px; top: 22%; left: 30%;"></div>
-    <div class="asteroid" style="width: 18px; height: 16px; top: 48%; left: 82%; animation-duration: 26s;"></div>
-    <div class="asteroid" style="width: 10px; height: 9px; top: 68%; left: 14%; animation-duration: 18s;"></div>
-    <div class="asteroid" style="width: 16px; height: 14px; top: 85%; left: 70%; animation-duration: 22s;"></div>
+    <!-- Asteroids -->
+    <div class="asteroid" style="width: 14px; height: 12px; top: 20%; left: 28%;"></div>
+    <div class="asteroid" style="width: 18px; height: 16px; top: 46%; left: 84%; animation-duration: 26s;"></div>
+    <div class="asteroid" style="width: 10px; height: 9px; top: 66%; left: 12%; animation-duration: 18s;"></div>
+    <div class="asteroid" style="width: 16px; height: 14px; top: 86%; left: 68%; animation-duration: 22s;"></div>
   </div>
 
   <!-- ==========================================================================
-       3. NAVIGATION HEADER
+       3. NAVBAR / NAVIGATION
        ========================================================================== -->
-  <header class="header-nav">
+  <header class="navbar" id="navbar">
     <nav class="nav-inner">
-      <a href="#" class="nav-logo">
+      <a href="#hero" class="nav-logo">
         <img src="profile.jpg" alt="Louis Avatar" class="nav-avatar">
-        <span class="nav-brand">Louis.space</span>
+        <span class="nav-brand-title">Louis.space</span>
       </a>
 
       <div class="nav-status">
@@ -1449,262 +1775,827 @@
       </div>
 
       <ul class="nav-links">
+        <li><a href="#hero" class="nav-link">Home</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#achievements" class="nav-link">Achievements</a></li>
-        <li><a href="https://github.com/Louis-svg-attack" target="_blank" rel="noopener noreferrer" class="nav-link">GitHub</a></li>
+        <li><a href="#arsenal" class="nav-link">Arsenal &amp; Skills</a></li>
+        <li><a href="#achievements" class="nav-link">Certificates</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
     </nav>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#hero" class="mobile-nav-link">Home</a>
+      <a href="#about" class="mobile-nav-link">About Me</a>
+      <a href="#arsenal" class="mobile-nav-link">Arsenal &amp; Skills</a>
+      <a href="#achievements" class="mobile-nav-link">Certificates</a>
+      <a href="#contact" class="mobile-nav-link">Contact</a>
+    </div>
   </header>
 
-  <!-- ==========================================================================
-       4. HERO SECTION
-       ========================================================================== */ -->
   <main>
-    <section class="hero-section" id="about">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <span>✦</span> DEEP SPACE SECURITY &amp; WEB ARCHITECTURE
-        </div>
+    <!-- ==========================================================================
+         4. HERO SECTION
+         ========================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <!-- Hero Left Column -->
+          <div class="hero-left">
+            <div class="hero-badge-wrap">
+              <div class="tech-pill">
+                <span>🛡️</span> Available for Security Roles &amp; Freelance
+              </div>
+              <div class="tech-pill">
+                <span>⚡</span> v2.4 Architecture
+              </div>
+              <div class="tech-pill">
+                <span>✦</span> OWASP Ready
+              </div>
+            </div>
 
-        <h1 class="hero-title">
-          Exploring Digital Horizons,<br>
-          <span class="glow-text">Securing the Cyber Cosmos</span>
-        </h1>
+            <!-- Title -->
+            <h1 class="hero-title">
+              M. LOUIS STEVANO GUNAWAN
+            </h1>
 
-        <p class="hero-description">
-          Halo, saya <strong>Louis</strong> — Pelajar, Web Developer, dan Cybersecurity Hunter yang bersemangat mengeksplorasi kerentanan sistem serta merancang antarmuka web modern dengan standar estetika tertinggi.
-        </p>
+            <!-- Subtitle with Typewriter -->
+            <div class="hero-subtitle-wrapper" aria-label="Role Titles">
+              <span class="cli-prefix">&gt;</span>
+              <span class="typewriter-text" id="typewriter"></span>
+              <span class="typewriter-cursor" aria-hidden="true"></span>
+            </div>
 
-        <div class="hero-actions">
-          <a href="#achievements" class="btn-cosmic btn-primary">
-            <span>Jelajahi Pencapaian</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M7 17l9.2-9.2M17 17V8H8"/>
-            </svg>
-          </a>
-          <a href="https://github.com/Louis-svg-attack" target="_blank" rel="noopener noreferrer" class="btn-cosmic btn-secondary">
-            <span>Repository GitHub</span>
-          </a>
-        </div>
+            <!-- Description -->
+            <p class="hero-desc">
+              I break systems to understand how to protect them. Specializing in web vulnerability assessment, secure coding, and offensive security across the digital expanse.
+            </p>
 
-        <!-- 3 Stats Pill -->
-        <div class="hero-stats">
-          <div class="stat-pill">
-            <span class="stat-num">03</span>
-            <span class="stat-label">Kejuaraan &amp; Akreditasi</span>
+            <!-- Buttons -->
+            <div class="hero-actions">
+              <a href="#achievements" class="btn-cosmic btn-primary">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+                View Certificates
+              </a>
+              <a href="#contact" class="btn-cosmic btn-secondary">
+                Contact Me
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
           </div>
-          <div class="stat-pill">
-            <span class="stat-num">100%</span>
-            <span class="stat-label">Dedikasi Eksplorasi</span>
-          </div>
-          <div class="stat-pill">
-            <span class="stat-num">2026</span>
-            <span class="stat-label">Active Mission Year</span>
+
+          <!-- Hero Right Column: Profile with Glass Frame & Floating Elements -->
+          <div class="hero-right">
+            <div class="profile-card-wrapper">
+              <!-- Floating Top Badge -->
+              <div class="floating-top-badge">
+                <span style="font-size: 1.25rem;">🛡️</span>
+                <div>
+                  <div style="font-weight: 700; font-size: 0.85rem; color: #fff;">Offensive Security</div>
+                  <div style="font-size: 0.72rem; color: var(--accent-cyan); font-family: var(--font-mono);">OWASP Top 10 • Pentest</div>
+                </div>
+              </div>
+
+              <!-- Profile Glass Frame -->
+              <div class="profile-frame">
+                <div class="profile-frame-inner">
+                  <img src="profile.jpg" alt="M. Louis Stevano Gunawan - Penetration Tester" class="profile-img">
+                </div>
+              </div>
+
+              <!-- Floating Stats Card -->
+              <div class="floating-stat-card">
+                <div class="floating-stat-row" style="margin-bottom: 8px;">
+                  <div class="floating-stat-icon">🏆</div>
+                  <div class="floating-stat-info">
+                    <div class="floating-stat-number">3rd Place</div>
+                    <div class="floating-stat-label">Pentest Exposed Quiz</div>
+                  </div>
+                </div>
+                <div class="floating-stat-row">
+                  <div class="floating-stat-icon">🏅</div>
+                  <div class="floating-stat-info">
+                    <div class="floating-stat-number">Finalist</div>
+                    <div class="floating-stat-label">Jember Cyber Clash 2026</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Cosmic Star Divider -->
+    <!-- Cosmic Starline Divider -->
     <div class="cosmic-divider">
       <div class="divider-star"></div>
     </div>
 
     <!-- ==========================================================================
-         5. TIMELINE ACHIEVEMENTS (STRICT CARD ORDER & SWAP FIX APPLIED)
+         5. ABOUT / TENTANG SAYA SECTION
          ========================================================================== -->
-    <section class="section-container" id="achievements">
-      <div class="section-header">
-        <span class="section-badge">COSMIC FLIGHT RECORD</span>
-        <h2 class="section-title">Milestones &amp; Sertifikasi</h2>
-        <p class="section-subtitle">
-          Rekam jejak kompetisi, sertifikasi webinar cybersecurity, dan turnamen resmi yang telah dilalui.
-        </p>
+    <section class="section-wrap" id="about">
+      <div class="container">
+        <span class="section-tag">OVERVIEW &amp; PHILOSOPHY</span>
+        <h2 class="section-title">Architecting Security from the Inside Out</h2>
+        <p class="section-subtitle">Bridging offensive vulnerability research with resilient, modern engineering.</p>
+
+        <div class="about-grid">
+          <div class="about-card">
+            <h3 class="about-card-title">Adversarial Security Mindset</h3>
+            <p class="about-card-text">
+              A dedicated security enthusiast and developer with a dual-perspective mindset: finding vulnerabilities by thinking like an attacker, and neutralizing them by engineering <strong>secure-by-default</strong> software. From identifying zero-day attack vectors to hardening full-stack architectures across cloud and web perimeters.
+            </p>
+          </div>
+          <div class="about-card">
+            <h3 class="about-card-title">Full-Stack Resilience</h3>
+            <p class="about-card-text">
+              Whether dissecting network protocols, orchestrating reconnaissance, or performing deep penetration testing on modern web applications, my methodology centers on uncovering critical flaws before adversaries can exploit them — building digital fortresses that stand firm.
+            </p>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="timeline-wrapper">
-        <!-- Visual Timeline Path Line -->
-        <div class="timeline-line-bg"></div>
-        <div class="timeline-line-progress" id="timeline-progress"></div>
+    <!-- Cosmic Starline Divider -->
+    <div class="cosmic-divider">
+      <div class="divider-star"></div>
+    </div>
 
-        <!-- ================= CARD 1: JUARA 3 ================= -->
-        <article class="timeline-item" id="item-card-1">
-          <div class="timeline-node">
-            <div class="timeline-dot dot-gold"></div>
+    <!-- ==========================================================================
+         6. ARSENAL (SKILLS, TOOLS, LANGUAGES BENTO GRID)
+         ========================================================================== -->
+    <section class="section-wrap" id="arsenal">
+      <div class="container">
+        <span class="section-tag">CAPABILITIES &amp; ARSENAL</span>
+        <h2 class="section-title">Technical Arsenal</h2>
+        <p class="section-subtitle">An interactive, multi-dimensional Bento Grid showcasing offensive security operations, full-stack frameworks, security tools, and key metrics.</p>
+
+        <!-- Segmented Filter Pills -->
+        <div class="arsenal-filters">
+          <button class="filter-btn active" data-filter="all">All Arsenal</button>
+          <button class="filter-btn" data-filter="offensive">⚔️ Offensive Security</button>
+          <button class="filter-btn" data-filter="web">💻 Web &amp; Backend</button>
+          <button class="filter-btn" data-filter="tools">🛠️ Tools</button>
+        </div>
+
+        <!-- Master Bento Grid -->
+        <div class="bento-master-grid" id="bento-grid">
+          
+          <!-- BENTO 1: FEATURED CARD — Offensive Security Operations (Span 2) -->
+          <div class="bento-card bento-col-2" data-category="offensive">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper" style="background: rgba(0, 113, 227, 0.15);">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" fill="#0071E3"/>
+                  <path d="M12 12l4-4-4-4v8z" fill="#FFFFFF"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-offensive">CORE DISCIPLINE // 90%</span>
+            </div>
+            <h3 class="skill-title" style="font-size: 1.35rem;">Offensive Security &amp; Vulnerability Assessment</h3>
+            <p class="skill-desc">
+              Specialized in adversarial simulation, network port auditing, packet-level traffic sniffing, exploit verification, and proactive web perimeter hardening against OWASP Top 10 vulnerabilities.
+            </p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Penetration Testing Mastery</span><span>90%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="90"></div></div>
+            </div>
           </div>
 
-          <div class="cosmic-card">
-            <div class="card-grid">
-              <div class="card-info">
-                <div class="card-meta-row">
-                  <span class="badge-pill badge-gold">🏆 3rd Place Winner // Web Dev</span>
-                  <span class="card-date">2026 · Regional</span>
-                </div>
-                <h3 class="card-title">Juara 3 — Web Development Competition</h3>
-                <div class="card-issuer">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
-                  </svg>
-                  <span>Lomba Kompetensi Siswa / Event Resmi</span>
-                </div>
-                <p class="card-desc">
-                  Meraih Juara 3 dalam kompetisi Web Development tingkat regional, menampilkan keahlian dalam arsitektur kode responsif, efisiensi render antarmuka, dan integrasi frontend mutakhir.
-                </p>
-                <div class="card-footer">
-                  <button class="btn-inspect" onclick="openCertModal('cert1.jpg', 'Juara 3 — Web Development Competition', 'Lomba Kompetensi Siswa · Sertifikat Juara 3')">
-                    <span>Inspect Certificate</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-                    </svg>
-                  </button>
-                </div>
-              </div>
+          <!-- BENTO 2: STAT CARD — Years of Research -->
+          <div class="bento-card bento-stat-card" data-category="stat">
+            <div class="bento-card-top">
+              <span class="skill-tag tag-stat">EXPERIENCE</span>
+              <span>⚡</span>
+            </div>
+            <div class="bento-stat-number" data-stat="3" data-suffix="+">3+</div>
+            <div class="bento-stat-label">Years of Dedicated Security &amp; Dev Research</div>
+          </div>
 
-              <!-- Thumbnail cert1.jpg -->
-              <div class="card-preview" onclick="openCertModal('cert1.jpg', 'Juara 3 — Web Development Competition', 'Lomba Kompetensi Siswa · Sertifikat Juara 3')">
-                <img src="cert1.jpg" alt="Sertifikat Juara 3 Web Development" loading="lazy">
-                <div class="card-preview-overlay">
-                  <span class="preview-hint">🔍 Klik untuk memperbesar</span>
+          <!-- BENTO 3: STAT CARD — Tools Mastered -->
+          <div class="bento-card bento-stat-card" data-category="stat">
+            <div class="bento-card-top">
+              <span class="skill-tag tag-stat">TOOLSET</span>
+              <span>🛠️</span>
+            </div>
+            <div class="bento-stat-number" data-stat="12" data-suffix="+">12+</div>
+            <div class="bento-stat-label">Security &amp; Full-Stack Tools Mastered</div>
+          </div>
+
+          <!-- BENTO 4: Burp Suite (Tool & Offensive) -->
+          <div class="bento-card" data-category="offensive tools">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect width="24" height="24" rx="6" fill="#FFF3EE"/>
+                  <path d="M6 7h6a4 4 0 0 1 4 4c0 1.5-.8 2.8-2 3.5 1.5.6 2.5 2 2.5 3.8a4.5 4.5 0 0 1-4.5 4.7H6V7z" stroke="#FF5400" stroke-width="2"/>
+                  <line x1="6" y1="14" x2="12" y2="14" stroke="#FF5400" stroke-width="2"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-offensive">OFFENSIVE TOOL</span>
+            </div>
+            <h3 class="skill-title">Burp Suite</h3>
+            <p class="skill-desc">HTTP intercept, Repeater validation, intruder fuzzing, and request tampering.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Proficiency</span><span>90%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="90"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 5: Wireshark (Tool & Offensive) -->
+          <div class="bento-card" data-category="offensive tools">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect width="24" height="24" rx="6" fill="#F0FBF4"/>
+                  <path d="M4 17c4.5-6.5 7.5-8.5 10.5-12.5-1 5.5 2.5 8.5 6.5 8.5-3.5 2-9 4-17 4z" fill="#34C759"/>
+                  <path d="M3 18c5.5-1 11-1 18 0" stroke="#34C759" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-offensive">PACKET INSPECTION</span>
+            </div>
+            <h3 class="skill-title">Wireshark</h3>
+            <p class="skill-desc">Deep packet inspection, protocol dissection, and PCAP analysis.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Proficiency</span><span>85%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="85"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 6: Nmap (Tool & Recon) -->
+          <div class="bento-card" data-category="offensive tools">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect width="24" height="24" rx="6" fill="#FFF0F3"/>
+                  <circle cx="12" cy="12" r="8" stroke="#FF2D55" stroke-width="1.6"/>
+                  <circle cx="12" cy="12" r="4.5" stroke="#FF2D55" stroke-width="1" stroke-dasharray="2 2"/>
+                  <circle cx="12" cy="12" r="1.8" fill="#0071E3"/>
+                  <line x1="12" y1="12" x2="18" y2="7.5" stroke="#0071E3" stroke-width="1.8"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-offensive">RECON TOOL</span>
+            </div>
+            <h3 class="skill-title">Nmap</h3>
+            <p class="skill-desc">Active host discovery, OS fingerprinting, and custom NSE vulnerability scripts.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Proficiency</span><span>92%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="92"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 7: Metasploit (Tool & Exploitation) -->
+          <div class="bento-card" data-category="offensive tools">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect width="24" height="24" rx="6" fill="#F0F7FF"/>
+                  <path d="M4 19V5l8 6 8-6v14l-8-5-8 5z" stroke="#0071E3" stroke-width="1.8" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-offensive">EXPLOITATION</span>
+            </div>
+            <h3 class="skill-title">Metasploit</h3>
+            <p class="skill-desc">Exploit verification, msfvenom payload generation, and post-audit tests.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Proficiency</span><span>80%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="80"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 8: FEATURED CARD — Web & Backend Architecture (Span 2) -->
+          <div class="bento-card bento-col-2" data-category="web">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper" style="background: rgba(255, 45, 85, 0.12);">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#FF2D55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-web">FULL-STACK // 95%</span>
+            </div>
+            <h3 class="skill-title" style="font-size: 1.35rem;">Modern Web &amp; Backend Engineering</h3>
+            <p class="skill-desc">
+              Building secure-by-default, lightning-fast digital experiences with React.js, Next.js, Python, PHP, Java enterprise services, and robust PostgreSQL/Supabase databases.
+            </p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Web Architecture Proficiency</span><span>95%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="95"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 9: STAT CARD — Major Accolades -->
+          <div class="bento-card bento-stat-card" data-category="stat">
+            <div class="bento-card-top">
+              <span class="skill-tag tag-stat">ACCOLADES</span>
+              <span>🏆</span>
+            </div>
+            <div class="bento-stat-number" data-stat="3" data-suffix="">3</div>
+            <div class="bento-stat-label">Major Verified Certifications &amp; Podium Finishes</div>
+          </div>
+
+          <!-- BENTO 10: STAT CARD — Commitment -->
+          <div class="bento-card bento-stat-card" data-category="stat">
+            <div class="bento-card-top">
+              <span class="skill-tag tag-stat">MISSION</span>
+              <span>🎯</span>
+            </div>
+            <div class="bento-stat-number" data-stat="100" data-suffix="%">100%</div>
+            <div class="bento-stat-label">Commitment to Security &amp; Code Quality</div>
+          </div>
+
+          <!-- BENTO 11: React.js (Web Framework) -->
+          <div class="bento-card" data-category="web">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <ellipse cx="12" cy="12" rx="9" ry="3.5" stroke="#0071E3" stroke-width="1.4" transform="rotate(30 12 12)"/>
+                  <ellipse cx="12" cy="12" rx="9" ry="3.5" stroke="#0071E3" stroke-width="1.4" transform="rotate(90 12 12)"/>
+                  <ellipse cx="12" cy="12" rx="9" ry="3.5" stroke="#0071E3" stroke-width="1.4" transform="rotate(150 12 12)"/>
+                  <circle cx="12" cy="12" r="1.8" fill="#0071E3"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-web">UI LIBRARY</span>
+            </div>
+            <h3 class="skill-title">React.js</h3>
+            <p class="skill-desc">Component hierarchy, custom hooks, and reactive state workflows.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Proficiency</span><span>86%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="86"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 12: Next.js (Web Framework) -->
+          <div class="bento-card" data-category="web">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="11" fill="#000"/>
+                  <path d="M8 8v8M16 8l-8 8.8" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+                  <path d="M16 8v5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-web">FULL-STACK</span>
+            </div>
+            <h3 class="skill-title">Next.js</h3>
+            <p class="skill-desc">SSR, SSG, edge routing, and performant web hydration.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Proficiency</span><span>82%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="82"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 13: Python (Programming Language) -->
+          <div class="bento-card" data-category="web offensive">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M11.8 3c-4.2 0-3.9 1.8-3.9 1.8l.05 1.9h4v.5H5.8S3 6.9 3 11.2c0 4.2 2.5 4.1 2.5 4.1h1.5v-2.1c0-2.4 2-2.3 2-2.3h4s1.9 0 1.9-1.9V5s.4-2-3.1-2zm-1.2 1.3c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7z" fill="#3776AB"/>
+                  <path d="M12.2 21c4.2 0 3.9-1.8 3.9-1.8l-.05-1.9h-4v-.5h6.1s2.8.3 2.8-4c0-4.2-2.5-4.1-2.5-4.1h-1.5v2.1c0 2.4-2 2.3-2 2.3h-4s-1.9 0-1.9 1.9V19s-.4 2 3.1 2zm1.2-1.3c-.4 0-.7-.3-.7-.7s.3-.7.7-.7.7.3.7.7-.3.7-.7.7z" fill="#FFD438"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-web">AUTOMATION</span>
+            </div>
+            <h3 class="skill-title">Python</h3>
+            <p class="skill-desc">Custom exploit scripts, web crawlers, and socket testing.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Proficiency</span><span>88%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="88"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 14: Supabase (Database & Tool) -->
+          <div class="bento-card" data-category="web tools">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M13 2L3.5 13.5h7.2L9.5 22 20.5 10.5h-7.5L13 2z" fill="#3ECF8E"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-web">DATABASE TOOL</span>
+            </div>
+            <h3 class="skill-title">Supabase</h3>
+            <p class="skill-desc">PostgreSQL relational modeling, RLS policies, and realtime sync.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Proficiency</span><span>85%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="85"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 15: Tailwind CSS (Styling Tool) -->
+          <div class="bento-card" data-category="web tools">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 6c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8 1 .2 1.6.9 2.4 1.7 1.2 1.3 2.7 2.8 6.4 2.8 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-1-.2-1.6-.9-2.4-1.7-1.2-1.3-2.7-2.8-6.4-2.8zm-6 6c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8 1 .2 1.6.9 2.4 1.7 1.2 1.3 2.7 2.8 6.4 2.8 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-1-.2-1.6-.9-2.4-1.7-1.2-1.3-2.7-2.8-6.4-2.8z" fill="#06B6D4"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-web">UTILITY CSS</span>
+            </div>
+            <h3 class="skill-title">Tailwind CSS</h3>
+            <p class="skill-desc">Utility-first design tokens, responsive layouts, and production configurations.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Proficiency</span><span>88%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="88"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 16: Bootstrap (Styling Tool) -->
+          <div class="bento-card" data-category="web tools">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect width="24" height="24" rx="5" fill="#7952B3"/>
+                  <path d="M8 6h4.5c1.8 0 3 1 3 2.4 0 1-.6 1.8-1.6 2.1 1.2.3 2 1.3 2 2.5 0 1.6-1.3 2.8-3.2 2.8H8V6zm2.3 4h2c.8 0 1.3-.4 1.3-1s-.5-1-1.3-1h-2v2zm0 3.8h2.3c.9 0 1.4-.4 1.4-1.1s-.5-1.1-1.4-1.1h-2.3v2.2z" fill="#fff"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-web">FRAMEWORK</span>
+            </div>
+            <h3 class="skill-title">Bootstrap</h3>
+            <p class="skill-desc">Responsive 12-col grids, modular components, and rapid dashboard prototypes.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Proficiency</span><span>85%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="85"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 17: Java (Programming Language) -->
+          <div class="bento-card" data-category="web">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M7.5 4.5c1.5-1 3-1 2.2 1.5-.7 2-2.5 2.5-.5 4.5" stroke="#E76F00" stroke-width="1.4" stroke-linecap="round"/>
+                  <path d="M11 3.5c1.8-1.2 3.5-1 2.6 1.8-.8 2.2-2.8 2.8-.6 5.2" stroke="#E76F00" stroke-width="1.4" stroke-linecap="round"/>
+                  <path d="M5.5 12h11c.5 0 .9.4.8.9-.6 3.1-3 5.1-6.3 5.1s-5.7-2-6.3-5.1c-.1-.5.3-.9.8-.9z" fill="#007396"/>
+                  <path d="M16 13h1.5a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2H15" stroke="#007396" stroke-width="1.3" stroke-linecap="round"/>
+                  <path d="M3.5 19.5c2.5 1 12.5 1 15 0" stroke="#007396" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-web">ENTERPRISE</span>
+            </div>
+            <h3 class="skill-title">Java</h3>
+            <p class="skill-desc">Object-oriented architecture, Spring Boot microservices, and JVM tuning.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Proficiency</span><span>82%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="82"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 18: PHP (Programming Language) -->
+          <div class="bento-card" data-category="web">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <ellipse cx="12" cy="12" rx="10" ry="6" fill="#777BB4"/>
+                  <text x="5" y="15" fill="#fff" font-size="7" font-family="sans-serif" font-weight="bold">php</text>
+                </svg>
+              </div>
+              <span class="skill-tag tag-web">BACKEND</span>
+            </div>
+            <h3 class="skill-title">PHP</h3>
+            <p class="skill-desc">Server-side execution, PDO integration, and legacy application audits.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Proficiency</span><span>84%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="84"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 19: HTML5 (Language Markup) -->
+          <div class="bento-card" data-category="web">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 3l1.6 17.5L12 22l6.4-1.5L20 3H4z" fill="#E34F26"/>
+                  <path d="M12 5v15.2l4.8-1.2L18.2 5H12z" fill="#EF652A"/>
+                  <path d="M8 8h8l-.3 3.5H9.5l.2 2.5h6l-.5 4.5-3.2.9-3.2-.9-.2-2.5" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-web">MARKUP</span>
+            </div>
+            <h3 class="skill-title">HTML5</h3>
+            <p class="skill-desc">Semantic document design, accessibility standards (a11y), and clean SEO.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Proficiency</span><span>95%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="95"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 20: CSS3 (Language Styling) -->
+          <div class="bento-card" data-category="web">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 3l1.6 17.5L12 22l6.4-1.5L20 3H4z" fill="#1572B6"/>
+                  <path d="M12 5v15.2l4.8-1.2L18.2 5H12z" fill="#33A9DC"/>
+                  <path d="M8.5 8h7l-.8 7-2.7.8-2.7-.8-.2-2h1.8l.1 1 1 .3 1-.3.2-2.5H8.7" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-web">STYLING</span>
+            </div>
+            <h3 class="skill-title">CSS3</h3>
+            <p class="skill-desc">Modern Flexbox/Grid, fluid clamps, glassmorphism, and hardware animations.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Proficiency</span><span>95%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="95"></div></div>
+            </div>
+          </div>
+
+          <!-- BENTO 21: JavaScript (ESNext - Span 2) -->
+          <div class="bento-card bento-col-2" data-category="web">
+            <div class="bento-card-top">
+              <div class="skill-icon-wrapper">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect width="24" height="24" rx="4" fill="#F7DF1E"/>
+                  <path d="M7 17.5c.5.8 1.4 1.3 2.5 1.3 1.5 0 2.5-.9 2.5-2.6v-7.2h-2v7.2c0 .6-.3.9-.8.9-.4 0-.8-.2-1-.6l-1.2 1zM14.5 17.3c.7.9 1.8 1.5 3 1.5 1.7 0 2.8-.9 2.8-2.3 0-1.4-.9-2-2.3-2.6l-.7-.3c-1-.4-1.4-.7-1.4-1.3 0-.6.5-1.1 1.4-1.1.8 0 1.4.3 1.8.9l1.4-1c-.8-1.1-1.9-1.5-3.2-1.5-2.1 0-3.3 1.3-3.3 2.8 0 1.4.9 2.1 2.2 2.7l.7.3c1 .4 1.5.8 1.5 1.4 0 .7-.6 1.2-1.5 1.2-1 0-1.7-.5-2.2-1.3l-1.5.7z" fill="#000"/>
+                </svg>
+              </div>
+              <span class="skill-tag tag-web">CORE RUNTIME // 90%</span>
+            </div>
+            <h3 class="skill-title">JavaScript (ESNext)</h3>
+            <p class="skill-desc">Asynchronous event loops, DOM performance, high-frequency canvas animation loops, physics lerp, and client-side logic mastery.</p>
+            <div class="progress-container">
+              <div class="progress-header"><span>Core Language Mastery</span><span>90%</span></div>
+              <div class="progress-bar-bg"><div class="progress-bar" data-width="90"></div></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Cosmic Starline Divider -->
+    <div class="cosmic-divider">
+      <div class="divider-star"></div>
+    </div>
+
+    <!-- ==========================================================================
+         7. ACHIEVEMENTS & CERTIFICATES (TIMELINE WITH STRICT FIX)
+         ========================================================================== -->
+    <section class="section-wrap" id="achievements">
+      <div class="container">
+        <span class="section-tag">CREDENTIALS &amp; PODIUMS</span>
+        <h2 class="section-title">Validated Expertise</h2>
+        <p class="section-subtitle">Official competition rankings, regional cybersecurity honors, and technical credentials.</p>
+
+        <div class="timeline-wrapper">
+          <div class="timeline-line-bg"></div>
+          <div class="timeline-line-progress" id="timeline-progress"></div>
+
+          <!-- CARD 1: 3RD PLACE COMPETITION -->
+          <article class="timeline-item" id="cert-item-0">
+            <div class="timeline-node">
+              <div class="timeline-dot dot-gold"></div>
+            </div>
+
+            <div class="cosmic-card">
+              <div class="card-grid">
+                <div class="card-info">
+                  <div class="card-meta-row">
+                    <span class="badge-pill badge-gold">🏆 Podium Finish // 3rd Place</span>
+                    <span class="card-date">2026 · Regional</span>
+                  </div>
+                  <h3 class="card-title">3rd PLACE — Pentest Exposed Quiz Competition</h3>
+                  <div class="card-issuer">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                    </svg>
+                    <span>Issued by: Mata Hacker &amp; Mata Siber</span>
+                  </div>
+                  <p class="card-desc">
+                    Achieving 3rd place in the Pentest Exposed Quiz Competition, demonstrating outstanding knowledge and deep understanding of Penetration Testing and Cybersecurity concepts.
+                  </p>
+                  <div class="card-footer">
+                    <button class="btn-inspect" onclick="openCertModal(0)">
+                      <span>Inspect Certificate</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- cert1.jpg -->
+                <div class="card-preview" onclick="openCertModal(0)">
+                  <img src="cert1.jpg" alt="3rd Place Pentest Exposed Quiz" loading="lazy">
+                  <div class="card-preview-overlay">
+                    <span class="preview-hint">🔍 Klik untuk memperbesar</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <!-- ================= CARD 2: WEBINAR PARTICIPANT (FIXED SWAP) ================= -->
-        <article class="timeline-item" id="item-card-2">
-          <div class="timeline-node">
-            <div class="timeline-dot dot-purple"></div>
-          </div>
+          <!-- CARD 2: WEBINAR PARTICIPANT (FIXED SWAP) -->
+          <article class="timeline-item" id="cert-item-1">
+            <div class="timeline-node">
+              <div class="timeline-dot dot-purple"></div>
+            </div>
 
-          <div class="cosmic-card">
-            <div class="card-grid">
-              <div class="card-info">
-                <div class="card-meta-row">
-                  <span class="badge-pill badge-purple">🛡️ Official Webinar Credential</span>
-                  <span class="card-date">07 Agustus 2026</span>
-                </div>
-                <h3 class="card-title">PENTEST EXPOSED — Webinar Participant</h3>
-                <div class="card-issuer">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                  </svg>
-                  <span>Mata Hacker &amp; Mata Siber · No. 039/MH-MS/PENTEST/IV/2026</span>
-                </div>
-                <p class="card-desc">
-                  Successfully participating in the webinar <em>"PENTEST EXPOSED: How Hackers Find &amp; Exploit Website Vulnerabilities"</em> — Friday, August 7, 2026. Mengkaji metodologi OWASP Top 10, penetration testing praktis, serta teknik analisis kerentanan web.
-                </p>
-                <div class="card-footer">
-                  <button class="btn-inspect" onclick="openCertModal('cert3.jpg', 'PENTEST EXPOSED — Webinar Participant', 'Mata Hacker & Mata Siber · No. 039/MH-MS/PENTEST/IV/2026')">
-                    <span>Inspect Certificate</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+            <div class="cosmic-card">
+              <div class="card-grid">
+                <div class="card-info">
+                  <div class="card-meta-row">
+                    <span class="badge-pill badge-purple">🛡️ Official Webinar Credential</span>
+                    <span class="card-date">Friday, August 7, 2026</span>
+                  </div>
+                  <h3 class="card-title">PENTEST EXPOSED — Webinar Participant</h3>
+                  <div class="card-issuer">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     </svg>
-                  </button>
+                    <span>Mata Hacker &amp; Mata Siber · No. 039/MH-MS/PENTEST/IV/2026</span>
+                  </div>
+                  <p class="card-desc">
+                    Successfully participating in the webinar <em>"PENTEST EXPOSED: How Hackers Find &amp; Exploit Website Vulnerabilities"</em> — Friday, August 7, 2026. Analisis serangan web, simulasi eksploitasi, dan remediasi keamanan.
+                  </p>
+                  <div class="card-footer">
+                    <button class="btn-inspect" onclick="openCertModal(1)">
+                      <span>Inspect Certificate</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Thumbnail cert3.jpg (Webinar - SERTIFIKAT PENGHARGAAN) -->
-              <div class="card-preview" onclick="openCertModal('cert3.jpg', 'PENTEST EXPOSED — Webinar Participant', 'Mata Hacker & Mata Siber · No. 039/MH-MS/PENTEST/IV/2026')">
-                <img src="cert3.jpg" alt="Sertifikat Penghargaan Webinar Pentest Exposed" loading="lazy">
-                <div class="card-preview-overlay">
-                  <span class="preview-hint">🔍 Klik untuk memperbesar</span>
+                <!-- cert3.jpg (Webinar - SERTIFIKAT PENGHARGAAN) -->
+                <div class="card-preview" onclick="openCertModal(1)">
+                  <img src="cert3.jpg" alt="Sertifikat Penghargaan Pentest Exposed Webinar" loading="lazy">
+                  <div class="card-preview-overlay">
+                    <span class="preview-hint">🔍 Klik untuk memperbesar</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <!-- ================= CARD 3: FINALIS (FIXED SWAP) ================= -->
-        <article class="timeline-item" id="item-card-3">
-          <div class="timeline-node">
-            <div class="timeline-dot dot-cyan"></div>
-          </div>
+          <!-- CARD 3: FINALIS (FIXED SWAP) -->
+          <article class="timeline-item" id="cert-item-2">
+            <div class="timeline-node">
+              <div class="timeline-dot dot-cyan"></div>
+            </div>
 
-          <div class="cosmic-card">
-            <div class="card-grid">
-              <div class="card-info">
-                <div class="card-meta-row">
-                  <span class="badge-pill badge-cyan">🏅 Competition Finalist // Regional</span>
-                  <span class="card-date">01 Juli 2026</span>
-                </div>
-                <h3 class="card-title">Finalis — Jember Cyber Clash 2026</h3>
-                <div class="card-issuer">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                  </svg>
-                  <span>Pemerintah Kabupaten Jember</span>
-                </div>
-                <p class="card-desc">
-                  Finalis Peserta dalam Kompetisi Jember Cyber Clash 2026 Tingkat SMA/SMK/MA se-Kabupaten Jember, diselenggarakan di Lantai 1 Gedung Jember Nusantara, 1 Juli 2026. Uji ketangguhan cyber security dan problem solving di bawah tekanan waktu.
-                </p>
-                <div class="card-footer">
-                  <button class="btn-inspect" onclick="openCertModal('cert2.jpg', 'Finalis — Jember Cyber Clash 2026', 'Pemerintah Kabupaten Jember · Certificate of Appreciation')">
-                    <span>Inspect Certificate</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+            <div class="cosmic-card">
+              <div class="card-grid">
+                <div class="card-info">
+                  <div class="card-meta-row">
+                    <span class="badge-pill badge-cyan">🏅 Competition Finalist // Regional</span>
+                    <span class="card-date">1 Juli 2026</span>
+                  </div>
+                  <h3 class="card-title">Finalis — Jember Cyber Clash 2026</h3>
+                  <div class="card-issuer">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                     </svg>
-                  </button>
+                    <span>Pemerintah Kabupaten Jember</span>
+                  </div>
+                  <p class="card-desc">
+                    Finalis Peserta dalam Kompetisi Jember Cyber Clash 2026 Tingkat SMA/SMK/MA se-Kabupaten Jember, diselenggarakan di Lantai 1 Gedung Jember Nusantara pada tanggal 1 Juli 2026.
+                  </p>
+                  <div class="card-footer">
+                    <button class="btn-inspect" onclick="openCertModal(2)">
+                      <span>Inspect Certificate</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Thumbnail cert2.jpg (Finalis - CERTIFICATE OF APPRECIATION) -->
-              <div class="card-preview" onclick="openCertModal('cert2.jpg', 'Finalis — Jember Cyber Clash 2026', 'Pemerintah Kabupaten Jember · Certificate of Appreciation')">
-                <img src="cert2.jpg" alt="Certificate of Appreciation Finalis Jember Cyber Clash" loading="lazy">
-                <div class="card-preview-overlay">
-                  <span class="preview-hint">🔍 Klik untuk memperbesar</span>
+                <!-- cert2.jpg (Finalis - CERTIFICATE OF APPRECIATION) -->
+                <div class="card-preview" onclick="openCertModal(2)">
+                  <img src="cert2.jpg" alt="Finalis Jember Cyber Clash 2026" loading="lazy">
+                  <div class="card-preview-overlay">
+                    <span class="preview-hint">🔍 Klik untuk memperbesar</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </article>
+          </article>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- Cosmic Starline Divider -->
+    <div class="cosmic-divider">
+      <div class="divider-star"></div>
+    </div>
+
+    <!-- ==========================================================================
+         8. CONTACT SECTION
+         ========================================================================== -->
+    <section class="section-wrap" id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div class="contact-badge">
+            Secure Communication Node
+          </div>
+          <h2 class="contact-title">Let's Secure the Web.</h2>
+          <p class="contact-desc">
+            Whether you need comprehensive penetration testing, vulnerability assessments, code hardening, or high-performance engineering — let's build something remarkable across the digital galaxy.
+          </p>
+
+          <!-- Email Strip with Copy to Clipboard -->
+          <div class="email-container">
+            <a href="mailto:5tevan.an0n.world@gmail.com" class="email-link" id="email-address">5tevan.an0n.world@gmail.com</a>
+            <button class="copy-btn" id="copy-email-btn" aria-label="Copy email address">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span id="copy-btn-text">Copy Address</span>
+            </button>
+          </div>
+
+          <!-- Social Links -->
+          <div class="social-strip">
+            <a href="https://github.com/Louis-svg-attack" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub Profile">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <!-- ==========================================================================
-       6. CERTIFICATE MODAL
+       9. CERTIFICATE LIGHTBOX MODAL
        ========================================================================== -->
-  <div class="modal-backdrop" id="cert-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-text" onclick="closeCertModal(event)">
-    <div class="modal-container" onclick="event.stopPropagation()">
-      <button class="modal-close-btn" onclick="closeCertModal()" aria-label="Tutup Preview">✕</button>
-      <div class="modal-img-wrap">
-        <img id="modal-image" src="" alt="Certificate Preview">
+  <div class="cert-modal" id="cert-modal" role="dialog" aria-modal="true" aria-hidden="true" onclick="closeCertModal(event)">
+    <div class="modal-dialog" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title" id="modal-title">Certificate Inspection</h3>
+          <span class="modal-subtitle" id="modal-issuer">Validation Node</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeCertModal()" aria-label="Close modal">&times;</button>
       </div>
-      <div class="modal-caption">
-        <span id="modal-title-text" style="font-weight: 600; color: #fff;"></span>
-        <span id="modal-sub-text" style="color: var(--accent-cyan);"></span>
+      <div class="modal-img-container">
+        <img src="" alt="Certificate Preview" class="modal-img" id="modal-img" title="Click to zoom in/out">
+      </div>
+      <div class="modal-desc-box" id="modal-desc"></div>
+      <div class="modal-footer">
+        <button class="modal-nav-btn" id="modal-prev-btn" onclick="prevCert()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          Previous
+        </button>
+        <div class="modal-counter" id="modal-counter">1 of 3</div>
+        <button class="modal-nav-btn" id="modal-next-btn" onclick="nextCert()">
+          Next
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
 
   <!-- ==========================================================================
-       7. FOOTER
+       10. FOOTER
        ========================================================================== -->
-  <footer class="cosmic-footer">
-    <div class="footer-content">
-      <p class="footer-quote">
-        "Across the infinite expanse of cyberspace, knowledge is our light and curiosity our compass."
-      </p>
-      <div class="footer-links">
-        <a href="#about" class="footer-link">Origin</a>
-        <a href="#achievements" class="footer-link">Chronicles</a>
-        <a href="https://github.com/Louis-svg-attack" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub Profile</a>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <div class="footer-copy">
+          &copy; 2026 <strong>M. LOUIS STEVANO GUNAWAN</strong>. All Rights Reserved.
+        </div>
+        <div class="footer-tagline">
+          Engineered for Visual Impact // Cosmic Architecture &amp; Penetration Testing
+        </div>
       </div>
-      <p class="footer-copy">
-        &copy; 2026 Louis. Designed with Cosmic Vision &amp; MacBook Precision. All rights reserved.
-      </p>
+      <a href="#hero" class="btn-cosmic btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.8rem;">
+        <span>Back to Top ↑</span>
+      </a>
     </div>
   </footer>
 
   <!-- ==========================================================================
-       8. JAVASCRIPT: ANIMATION LOGIC & COSMIC ENGINE
+       11. JAVASCRIPT: COSMIC ENGINE & INTERACTIONS
        ========================================================================== -->
   <script>
-    /* ------------------------------------------------------------------------
-       A. LOADING SCREEN DISMISS
-       ------------------------------------------------------------------------ */
+    'use strict';
+
+    /* A. Dismiss Loading Screen */
     window.addEventListener('load', () => {
       setTimeout(() => {
         const loader = document.getElementById('loading-screen');
@@ -1712,38 +2603,28 @@
       }, 700);
     });
 
-    /* ------------------------------------------------------------------------
-       B. SCROLL PROGRESS & TIMELINE DRAW INTERSECTION OBSERVER
-       ------------------------------------------------------------------------ */
+    /* B. Scroll Progress Bar & Back to Top */
     const progressBar = document.getElementById('scroll-progress');
-    const timelineProgress = document.getElementById('timeline-progress');
     const backToTopBtn = document.getElementById('back-to-top');
+    const timelineProgress = document.getElementById('timeline-progress');
 
-    function updateScrollEffects() {
+    window.addEventListener('scroll', () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const progressPercent = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
 
       if (progressBar) progressBar.style.width = progressPercent + '%';
 
-      // Back to top button visibility
       if (backToTopBtn) {
-        if (scrollTop > 380) {
-          backToTopBtn.classList.add('visible');
-        } else {
-          backToTopBtn.classList.remove('visible');
-        }
+        if (scrollTop > 380) backToTopBtn.classList.add('visible');
+        else backToTopBtn.classList.remove('visible');
       }
 
-      // Parallax effect on distant background elements
+      // Parallax on distant planets
       const saturn = document.getElementById('planet-saturn');
       const cyanPlanet = document.getElementById('planet-cyan');
       if (saturn) saturn.style.transform = `translateY(${scrollTop * 0.08}px)`;
       if (cyanPlanet) cyanPlanet.style.transform = `translateY(${scrollTop * -0.05}px)`;
-    }
-
-    window.addEventListener('scroll', () => {
-      requestAnimationFrame(updateScrollEffects);
     }, { passive: true });
 
     if (backToTopBtn) {
@@ -1752,15 +2633,14 @@
       });
     }
 
-    // Intersection Observer for Timeline Cards & Timeline Progress Fill
+    /* C. Timeline Scroll Observer */
     const timelineItems = document.querySelectorAll('.timeline-item');
-    const observer = new IntersectionObserver((entries) => {
+    const timelineObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in-view');
         }
       });
-      // Update height of timeline drawn stroke
       const visibleCount = document.querySelectorAll('.timeline-item.in-view').length;
       if (timelineProgress) {
         if (visibleCount === 1) timelineProgress.style.height = '33%';
@@ -1768,12 +2648,9 @@
         else if (visibleCount >= 3) timelineProgress.style.height = '100%';
       }
     }, { threshold: 0.2 });
+    timelineItems.forEach(item => timelineObserver.observe(item));
 
-    timelineItems.forEach(item => observer.observe(item));
-
-    /* ------------------------------------------------------------------------
-       C. LAYER 1: STATIC & TWINKLING STARS CANVAS (250+ STARS)
-       ------------------------------------------------------------------------ */
+    /* D. Static & Twinkling Stars (Canvas Layer 1) */
     const starsCanvas = document.getElementById('stars-canvas');
     const sCtx = starsCanvas ? starsCanvas.getContext('2d') : null;
     let starsList = [];
@@ -1791,8 +2668,8 @@
 
     function initStars() {
       starsList = [];
-      const starCount = Math.min(260, Math.floor((width * height) / 3800));
-      for (let i = 0; i < starCount; i++) {
+      const count = Math.min(260, Math.floor((width * height) / 3800));
+      for (let i = 0; i < count; i++) {
         starsList.push({
           x: Math.random() * width,
           y: Math.random() * height,
@@ -1805,7 +2682,6 @@
       }
     }
 
-    let starAnimFrame;
     function renderStars() {
       if (!sCtx) return;
       sCtx.clearRect(0, 0, width, height);
@@ -1818,15 +2694,12 @@
 
         sCtx.beginPath();
         sCtx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        sCtx.fillStyle = star.isCyan 
-          ? `rgba(90, 200, 250, ${alpha})`
-          : `rgba(255, 255, 255, ${alpha})`;
+        sCtx.fillStyle = star.isCyan ? `rgba(90, 200, 250, ${alpha})` : `rgba(255, 255, 255, ${alpha})`;
         sCtx.shadowBlur = star.size > 2 ? 6 : 0;
         sCtx.shadowColor = star.isCyan ? '#00f0ff' : '#ffffff';
         sCtx.fill();
       }
-
-      starAnimFrame = requestAnimationFrame(renderStars);
+      requestAnimationFrame(renderStars);
     }
 
     window.addEventListener('resize', resizeStarsCanvas);
@@ -1835,20 +2708,16 @@
       renderStars();
     }
 
-    /* ------------------------------------------------------------------------
-       D. LAYER 2: SHOOTING STARS ENGINE (RANDOM TIMING & TRANSLATION)
-       ------------------------------------------------------------------------ */
+    /* E. Shooting Stars Engine (Layer 2) */
     const shootingStarsBox = document.getElementById('shooting-stars-box');
-
     function createShootingStar() {
       if (!shootingStarsBox) return;
       const star = document.createElement('div');
       star.className = 'shooting-star';
 
-      // Random starting coordinates at top or right
       const startX = Math.random() * (window.innerWidth * 0.8) + window.innerWidth * 0.2;
       const startY = Math.random() * (window.innerHeight * 0.4);
-      const duration = (Math.random() * 1.2 + 0.9).toFixed(2); // 0.9s - 2.1s
+      const duration = (Math.random() * 1.2 + 0.9).toFixed(2);
 
       star.style.left = startX + 'px';
       star.style.top = startY + 'px';
@@ -1856,13 +2725,11 @@
 
       shootingStarsBox.appendChild(star);
 
-      // Trigger animation on next tick
       requestAnimationFrame(() => {
         star.style.opacity = '1';
         star.style.transform = `translate(-${window.innerWidth * 0.35}px, ${window.innerWidth * 0.35}px) rotate(-45deg)`;
       });
 
-      // Cleanup
       setTimeout(() => {
         star.style.opacity = '0';
         setTimeout(() => {
@@ -1870,64 +2737,12 @@
         }, 500);
       }, duration * 800);
 
-      // Schedule next shooting star (3 - 7 seconds)
       const nextTime = Math.random() * 4000 + 3000;
       setTimeout(createShootingStar, nextTime);
     }
+    setTimeout(createShootingStar, 1500);
 
-    // Launch initial shooting stars with staggered delays
-    setTimeout(createShootingStar, 1200);
-    setTimeout(createShootingStar, 4500);
-
-    /* ------------------------------------------------------------------------
-       E. LAYER 6: COMET / METEOR SHOWER (PERIODIC GROUP OF 3-5 METEORS)
-       ------------------------------------------------------------------------ */
-    const meteorLayer = document.getElementById('meteor-shower-layer');
-
-    function triggerMeteorShower() {
-      if (!meteorLayer) return;
-      const count = Math.floor(Math.random() * 3) + 3; // 3 to 5 meteors
-
-      for (let i = 0; i < count; i++) {
-        setTimeout(() => {
-          const meteor = document.createElement('div');
-          meteor.className = 'shooting-star';
-          meteor.style.background = 'linear-gradient(90deg, #fff 0%, #ff375f 40%, transparent 100%)';
-          meteor.style.filter = 'drop-shadow(0 0 8px rgba(255, 55, 95, 0.8))';
-
-          const sX = Math.random() * (window.innerWidth * 0.6) + (window.innerWidth * 0.3);
-          const sY = Math.random() * (window.innerHeight * 0.3);
-          const dur = (Math.random() * 0.7 + 0.7).toFixed(2);
-
-          meteor.style.left = sX + 'px';
-          meteor.style.top = sY + 'px';
-          meteor.style.transition = `transform ${dur}s cubic-bezier(0.16, 1, 0.3, 1), opacity ${dur}s ease-out`;
-
-          meteorLayer.appendChild(meteor);
-
-          requestAnimationFrame(() => {
-            meteor.style.opacity = '1';
-            meteor.style.transform = `translate(-${window.innerWidth * 0.4}px, ${window.innerWidth * 0.4}px) rotate(-45deg)`;
-          });
-
-          setTimeout(() => {
-            meteor.style.opacity = '0';
-            setTimeout(() => {
-              if (meteor.parentNode) meteor.parentNode.removeChild(meteor);
-            }, 300);
-          }, dur * 700);
-        }, i * 280);
-      }
-
-      // Repeat shower every 16 - 22 seconds
-      setTimeout(triggerMeteorShower, Math.random() * 6000 + 16000);
-    }
-
-    setTimeout(triggerMeteorShower, 6000);
-
-    /* ------------------------------------------------------------------------
-       F. CURSOR TRAIL ENGINE (CANVAS STAR PARTICLES)
-       ------------------------------------------------------------------------ */
+    /* F. Cursor Trail Engine (Canvas) */
     const cursorCanvas = document.getElementById('cursor-canvas');
     const cCtx = cursorCanvas ? cursorCanvas.getContext('2d') : null;
     let trailParticles = [];
@@ -1958,7 +2773,6 @@
 
       function animateCursorTrail() {
         cCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
-
         for (let i = 0; i < trailParticles.length; i++) {
           const p = trailParticles[i];
           p.x += p.vx;
@@ -1976,46 +2790,182 @@
             cCtx.globalAlpha = 1.0;
           }
         }
-
         trailParticles = trailParticles.filter(p => p.life > 0);
         requestAnimationFrame(animateCursorTrail);
       }
       animateCursorTrail();
     }
 
-    /* ------------------------------------------------------------------------
-       G. CERTIFICATE MODAL HANDLERS
-       ------------------------------------------------------------------------ */
-    const modalBackdrop = document.getElementById('cert-modal');
-    const modalImg = document.getElementById('modal-image');
-    const modalTitle = document.getElementById('modal-title-text');
-    const modalSub = document.getElementById('modal-sub-text');
+    /* G. Typewriter Effect */
+    const typewriterElem = document.getElementById('typewriter');
+    if (typewriterElem) {
+      const phrases = ["Penetration Tester", "Web Developer", "Security Enthusiast", "Vulnerability Hunter"];
+      let phraseIndex = 0, charIndex = 0, isDeleting = false, typingSpeed = 80;
 
-    function openCertModal(imageSrc, title, issuer) {
-      if (!modalBackdrop || !modalImg) return;
-      modalImg.src = imageSrc;
-      modalTitle.textContent = title;
-      modalSub.textContent = issuer;
-      modalBackdrop.classList.add('active');
+      function type() {
+        const currentPhrase = phrases[phraseIndex];
+        if (isDeleting) {
+          typewriterElem.textContent = currentPhrase.substring(0, charIndex - 1);
+          charIndex--;
+          typingSpeed = 40;
+        } else {
+          typewriterElem.textContent = currentPhrase.substring(0, charIndex + 1);
+          charIndex++;
+          typingSpeed = 90;
+        }
+
+        if (!isDeleting && charIndex === currentPhrase.length) {
+          isDeleting = true;
+          typingSpeed = 2200;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          typingSpeed = 400;
+        }
+        setTimeout(type, typingSpeed);
+      }
+      type();
+    }
+
+    /* H. Bento Filter Logic */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const bentoCards = document.querySelectorAll('#bento-grid .bento-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+        bentoCards.forEach(card => {
+          const category = card.getAttribute('data-category') || '';
+          if (filter === 'all' || category.includes(filter)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    /* I. Progress Bars Animation on Scroll */
+    const progressObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bar = entry.target.querySelector('.progress-bar');
+          if (bar) {
+            const targetWidth = bar.getAttribute('data-width');
+            bar.style.width = targetWidth + '%';
+          }
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.bento-card').forEach(card => progressObserver.observe(card));
+
+    /* J. Certificates Modal Engine (With Strict Swap Validation) */
+    const certsData = [
+      {
+        title: "3rd PLACE — Pentest Exposed Quiz Competition",
+        issuer: "Issued by: Mata Hacker & Mata Siber",
+        desc: "Achieving 3rd PLACE in the Pentest Exposed Quiz Competition, demonstrating outstanding knowledge and understanding of Penetration Testing and Cybersecurity.",
+        image: "cert1.jpg"
+      },
+      {
+        title: "PENTEST EXPOSED — Webinar Participant",
+        issuer: "Issued by: Mata Hacker & Mata Siber · No. 039/MH-MS/PENTEST/IV/2026",
+        desc: "Successfully participating in the webinar 'PENTEST EXPOSED: How Hackers Find & Exploit Website Vulnerabilities' held on Friday, August 7, 2026.",
+        image: "cert3.jpg"
+      },
+      {
+        title: "Finalis — Jember Cyber Clash 2026",
+        issuer: "Issued by: Pemerintah Kabupaten Jember",
+        desc: "Finalis Peserta dalam Kompetisi Jember Cyber Clash 2026 Tingkat SMA/SMK/MA se-Kabupaten Jember, yang diselenggarakan di Lantai 1 Gedung Jember Nusantara pada tanggal 1 Juli 2026.",
+        image: "cert2.jpg"
+      }
+    ];
+
+    let currentCertIdx = 0;
+    const certModal = document.getElementById('cert-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalIssuer = document.getElementById('modal-issuer');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalImg = document.getElementById('modal-img');
+    const modalCounter = document.getElementById('modal-counter');
+
+    function openCertModal(index) {
+      currentCertIdx = index;
+      const cert = certsData[index];
+      modalTitle.textContent = cert.title;
+      modalIssuer.textContent = cert.issuer;
+      modalDesc.textContent = cert.desc;
+      modalImg.src = cert.image;
+      modalImg.alt = cert.title;
+      modalImg.classList.remove('zoomed');
+      modalCounter.textContent = `${index + 1} of ${certsData.length}`;
+
+      certModal.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
     function closeCertModal(e) {
-      if (modalBackdrop) {
-        modalBackdrop.classList.remove('active');
-        document.body.style.overflow = '';
-      }
+      certModal.classList.remove('active');
+      document.body.style.overflow = '';
+      if (modalImg) modalImg.classList.remove('zoomed');
+    }
+
+    function prevCert() {
+      currentCertIdx = (currentCertIdx - 1 + certsData.length) % certsData.length;
+      openCertModal(currentCertIdx);
+    }
+
+    function nextCert() {
+      currentCertIdx = (currentCertIdx + 1) % certsData.length;
+      openCertModal(currentCertIdx);
+    }
+
+    if (modalImg) {
+      modalImg.addEventListener('click', (e) => {
+        e.stopPropagation();
+        modalImg.classList.toggle('zoomed');
+      });
     }
 
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modalBackdrop && modalBackdrop.classList.contains('active')) {
-        closeCertModal();
-      }
+      if (!certModal.classList.contains('active')) return;
+      if (e.key === 'Escape') closeCertModal();
+      if (e.key === 'ArrowLeft') prevCert();
+      if (e.key === 'ArrowRight') nextCert();
     });
 
-    /* ------------------------------------------------------------------------
-       H. MOON PHASE CLICK EASTER EGG
-       ------------------------------------------------------------------------ */
+    /* K. Copy Email to Clipboard */
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    const copyBtnText = document.getElementById('copy-btn-text');
+    if (copyEmailBtn) {
+      copyEmailBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText('5tevan.an0n.world@gmail.com').then(() => {
+          copyBtnText.textContent = 'Copied!';
+          setTimeout(() => {
+            copyBtnText.textContent = 'Copy Address';
+          }, 2000);
+        });
+      });
+    }
+
+    /* L. Mobile Menu Toggle */
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+      });
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+        });
+      });
+    }
+
+    /* M. Moon Phase Toggle */
     const moonCorner = document.getElementById('moon-phase');
     const phases = [
       { name: 'Waxing Crescent', shadow: 'inset -8px 0px 0 0 #fff' },
@@ -2025,7 +2975,6 @@
       { name: 'Waning Gibbous', shadow: 'inset 6px 2px 0 0 #e6f1ff' }
     ];
     let currentPhaseIdx = 2;
-
     if (moonCorner) {
       moonCorner.addEventListener('click', () => {
         currentPhaseIdx = (currentPhaseIdx + 1) % phases.length;
