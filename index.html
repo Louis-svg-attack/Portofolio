@@ -1135,6 +1135,7 @@
     .dot-gold { color: var(--accent-gold); background: var(--accent-gold); }
     .dot-purple { color: var(--accent-purple-light); background: var(--accent-purple-light); }
     .dot-cyan { color: var(--accent-cyan-light); background: var(--accent-cyan-light); }
+    .dot-orange { color: #FF9F0A; background: #FF9F0A; }
 
     @keyframes pulseDotOrbit {
       0%, 100% { transform: scale(1); }
@@ -1201,6 +1202,12 @@
       border-color: rgba(90, 200, 250, 0.4);
       background: rgba(90, 200, 250, 0.08);
       box-shadow: 0 0 15px rgba(90, 200, 250, 0.15);
+    }
+    .badge-orange {
+      color: #FF9F0A;
+      border-color: rgba(255, 159, 10, 0.4);
+      background: rgba(255, 159, 10, 0.08);
+      box-shadow: 0 0 15px rgba(255, 159, 10, 0.15);
     }
     .card-date {
       font-family: var(--font-mono);
@@ -1614,6 +1621,69 @@
       box-shadow: 0 0 25px rgba(0, 240, 255, 0.7);
     }
 
+    /* What These Certificates Demonstrate Section */
+    .demonstrate-section {
+      margin-top: 5rem;
+      position: relative;
+    }
+    .demonstrate-header {
+      text-align: center;
+      margin-bottom: 2.2rem;
+    }
+    .demonstrate-title-main {
+      font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .demonstrate-subtitle-main {
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .demonstrate-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .demonstrate-card {
+      background: rgba(255, 255, 255, 0.028);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 20px;
+      padding: 2rem 1.4rem;
+      transition: transform 0.4s var(--ease-apple), border-color 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .demonstrate-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 240, 255, 0.35);
+      box-shadow: 0 15px 40px rgba(0, 240, 255, 0.15);
+    }
+    .demonstrate-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.9rem;
+      display: inline-block;
+    }
+    .demonstrate-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .demonstrate-desc {
+      font-size: 0.88rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
     /* ==========================================================================
        12. RESPONSIVENESS & MEDIA QUERIES
        ========================================================================== */
@@ -1633,6 +1703,9 @@
         justify-content: center;
       }
       .bento-master-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .demonstrate-grid {
         grid-template-columns: repeat(2, 1fr);
       }
       .card-grid {
@@ -1655,6 +1728,9 @@
       }
       .bento-col-2 {
         grid-column: span 1;
+      }
+      .demonstrate-grid {
+        grid-template-columns: 1fr;
       }
       .card-grid {
         grid-template-columns: 1fr;
@@ -2108,8 +2184,8 @@
               <span class="skill-tag tag-stat">ACCOLADES</span>
               <span>🏆</span>
             </div>
-            <div class="bento-stat-number" data-stat="3" data-suffix="">3</div>
-            <div class="bento-stat-label">Major Verified Certifications &amp; Podium Finishes</div>
+            <div class="bento-stat-number" data-stat="4" data-suffix="">4</div>
+            <div class="bento-stat-label">Major Verified Certifications &amp; Accolades</div>
           </div>
 
           <!-- BENTO 10: STAT CARD — Commitment -->
@@ -2359,32 +2435,32 @@
           <div class="timeline-line-bg"></div>
           <div class="timeline-line-progress" id="timeline-progress"></div>
 
-          <!-- CARD 1: WEBINAR PARTICIPANT -->
+          <!-- CARD 1: 3RD PLACE COMPETITION -->
           <article class="timeline-item" id="cert-item-0">
             <div class="timeline-node">
-              <div class="timeline-dot dot-purple"></div>
+              <div class="timeline-dot dot-gold"></div>
             </div>
 
             <div class="cosmic-card">
               <div class="card-grid">
                 <div class="card-info">
                   <div class="card-meta-row">
-                    <span class="badge-pill badge-purple">🛡️ Official Webinar Credential</span>
-                    <span class="card-date">Friday, August 7, 2026</span>
+                    <span class="badge-pill badge-gold">🥉 Podium Finish // 3rd Place</span>
+                    <span class="card-date">2026 · Regional</span>
                   </div>
-                  <h3 class="card-title">PENTEST EXPOSED — Webinar Participant</h3>
+                  <h3 class="card-title">3rd PLACE — Pentest Exposed Quiz Competition</h3>
                   <div class="card-issuer">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                      <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
                     </svg>
-                    <span>Mata Hacker &amp; Mata Siber · No. 039/MH-MS/PENTEST/IV/2026</span>
+                    <span>Mata Hacker &amp; Mata Siber</span>
                   </div>
                   <p class="card-desc">
-                    Successfully participating in the webinar 'PENTEST EXPOSED: How Hackers Find &amp; Exploit Website Vulnerabilities' — Friday, August 7, 2026. Analisis serangan web, simulasi eksploitasi, dan remediasi keamanan.
+                    Meraih Juara 3 dalam kompetisi yang menguji pemahaman mendalam tentang Penetration Testing dan Cybersecurity. Membuktikan kemampuan analisis kerentanan sistem, pemahaman metodologi ethical hacking, dan pengetahuan tentang OWASP Top 10 serta network security. Kompetensi yang langsung applicable untuk role Junior Penetration Tester atau Security Analyst.
                   </p>
                   <div class="card-footer">
                     <button class="btn-inspect" onclick="openCertModal(0)">
-                      <span>Inspect Certificate</span>
+                      <span>Inspect Certificate →</span>
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
                       </svg>
@@ -2392,9 +2468,9 @@
                   </div>
                 </div>
 
-                <!-- cert3.jpg: SERTIFIKAT PENGHARGAAN (Background Gelap/Hitam) -->
+                <!-- cert2.jpg: 3rd Place Certificate of Appreciation with Gold Medal -->
                 <div class="card-preview" onclick="openCertModal(0)">
-                  <img src="cert3.jpg" alt="Sertifikat Penghargaan Pentest Exposed Webinar" loading="lazy">
+                  <img src="cert2.jpg" alt="3rd PLACE — Pentest Exposed Quiz Competition" loading="lazy">
                   <div class="card-preview-overlay">
                     <span class="preview-hint">🔍 Klik untuk memperbesar</span>
                   </div>
@@ -2403,7 +2479,7 @@
             </div>
           </article>
 
-          <!-- CARD 2: FINALIS JEMBER CYBER CLASH -->
+          <!-- CARD 2: REGIONAL FINALIST (MUST USE DARK BACKGROUND IMAGE) -->
           <article class="timeline-item" id="cert-item-1">
             <div class="timeline-node">
               <div class="timeline-dot dot-cyan"></div>
@@ -2421,14 +2497,14 @@
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                     </svg>
-                    <span>Pemerintah Kabupaten Jember</span>
+                    <span>Pemerintah Kabupaten Jember · Dinas Komunikasi dan Informatika</span>
                   </div>
                   <p class="card-desc">
-                    Finalis Peserta dalam Kompetisi Jember Cyber Clash 2026 Tingkat SMA/SMK/MA se-Kabupaten Jember, diselenggarakan di Lantai 1 Gedung Jember Nusantara pada tanggal 1 Juli 2026.
+                    Terpilih sebagai Finalis dalam Kompetisi Jember Cyber Clash 2026 Tingkat SMA/SMK/MA se-Kabupaten Jember. Kompetisi ini menguji kemampuan praktis dalam CTF (Capture The Flag), analisis forensik digital, web exploitation, dan network security. Mendemonstrasikan kemampuan problem-solving di bawah tekanan dan kesiapan untuk role Cybersecurity Analyst atau SOC Analyst. (No: 500.12.10.1/182.2.20/35.09.323/2026)
                   </p>
                   <div class="card-footer">
                     <button class="btn-inspect" onclick="openCertModal(1)">
-                      <span>Inspect Certificate</span>
+                      <span>Inspect Certificate →</span>
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
                       </svg>
@@ -2436,9 +2512,9 @@
                   </div>
                 </div>
 
-                <!-- cert2.jpg: CERTIFICATE OF APPRECIATION (Background Terang + Medali Emas) -->
+                <!-- cert3.jpg: SERTIFIKAT PENGHARGAAN (DARK BACKGROUND, KOMINFO JEMBER) -->
                 <div class="card-preview" onclick="openCertModal(1)">
-                  <img src="cert2.jpg" alt="Certificate of Appreciation Finalis Jember Cyber Clash" loading="lazy">
+                  <img src="cert3.jpg" alt="Finalis — Jember Cyber Clash 2026" loading="lazy">
                   <div class="card-preview-overlay">
                     <span class="preview-hint">🔍 Klik untuk memperbesar</span>
                   </div>
@@ -2447,32 +2523,32 @@
             </div>
           </article>
 
-          <!-- CARD 3: 3RD PLACE COMPETITION -->
+          <!-- CARD 3: WEBINAR PARTICIPANT (MUST USE LIGHT BACKGROUND IMAGE) -->
           <article class="timeline-item" id="cert-item-2">
             <div class="timeline-node">
-              <div class="timeline-dot dot-gold"></div>
+              <div class="timeline-dot dot-purple"></div>
             </div>
 
             <div class="cosmic-card">
               <div class="card-grid">
                 <div class="card-info">
                   <div class="card-meta-row">
-                    <span class="badge-pill badge-gold">🏆 Podium Finish // 3rd Place</span>
-                    <span class="card-date">2026 · Regional</span>
+                    <span class="badge-pill badge-purple">🎓 Official Webinar Credential</span>
+                    <span class="card-date">Friday, August 7, 2026</span>
                   </div>
-                  <h3 class="card-title">3rd PLACE — Pentest Exposed Quiz Competition</h3>
+                  <h3 class="card-title">PENTEST EXPOSED — Webinar Participant</h3>
                   <div class="card-issuer">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     </svg>
-                    <span>Issued by: Mata Hacker &amp; Mata Siber</span>
+                    <span>Mata Hacker &amp; Mata Siber · Adiva Solution</span>
                   </div>
                   <p class="card-desc">
-                    Achieving 3rd place in the Pentest Exposed Quiz Competition, demonstrating outstanding knowledge and deep understanding of Penetration Testing and Cybersecurity concepts.
+                    Partisipasi aktif dalam webinar eksklusif 'PENTEST EXPOSED: How Hackers Find &amp; Exploit Website Vulnerabilities'. Materi mencakup reconnaissance techniques, vulnerability scanning, SQL injection, XSS, CSRF, dan remediation strategies. Memperkuat pemahaman tentang offensive security methodology dan industry best practices untuk role Application Security Engineer atau Web Penetration Tester. (No: 039/MH-MS/PENTEST/IV/2026)
                   </p>
                   <div class="card-footer">
                     <button class="btn-inspect" onclick="openCertModal(2)">
-                      <span>Inspect Certificate</span>
+                      <span>Inspect Certificate →</span>
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
                       </svg>
@@ -2480,9 +2556,9 @@
                   </div>
                 </div>
 
-                <!-- cert1.jpg -->
+                <!-- cert1.jpg: CERTIFICATE OF PARTICIPATION (LIGHT BACKGROUND, ADIVA SOLUTION) -->
                 <div class="card-preview" onclick="openCertModal(2)">
-                  <img src="cert1.jpg" alt="3rd Place Pentest Exposed Quiz" loading="lazy">
+                  <img src="cert1.jpg" alt="PENTEST EXPOSED — Webinar Participant" loading="lazy">
                   <div class="card-preview-overlay">
                     <span class="preview-hint">🔍 Klik untuk memperbesar</span>
                   </div>
@@ -2490,6 +2566,86 @@
               </div>
             </div>
           </article>
+
+          <!-- CARD 4: DEBATE COMPETITION PARTICIPANT (NEW) -->
+          <article class="timeline-item" id="cert-item-3">
+            <div class="timeline-node">
+              <div class="timeline-dot dot-orange"></div>
+            </div>
+
+            <div class="cosmic-card">
+              <div class="card-grid">
+                <div class="card-info">
+                  <div class="card-meta-row">
+                    <span class="badge-pill badge-orange">🎤 Competition Participant // Regional</span>
+                    <span class="card-date">25 Mei 2026</span>
+                  </div>
+                  <h3 class="card-title">Peserta — Lomba Debat Indonesia (LDI) 2026</h3>
+                  <div class="card-issuer">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/>
+                    </svg>
+                    <span>Cabang Dinas Pendidikan Provinsi Jawa Timur Wilayah Jember</span>
+                  </div>
+                  <p class="card-desc">
+                    Berpartisipasi dalam Lomba Debat Indonesia (LDI) 2026 Bidang Bahasa Indonesia Tingkat SMA/SMK/MA se-Kabupaten Jember. Kompetisi ini mengasah kemampuan critical thinking, public speaking, argumentasi logis, dan analisis masalah secara terstruktur. Soft skills yang sangat dicari di dunia cybersecurity untuk vulnerability reporting, presentasi kepada stakeholder, dan kolaborasi tim. (No: 400.3.2/641/101.6.5/2026)
+                  </p>
+                  <div class="card-footer">
+                    <button class="btn-inspect" onclick="openCertModal(3)">
+                      <span>Inspect Certificate →</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- cert4.jpg: LOMBA DEBAT INDONESIA (WHITE BACKGROUND, DINAS PENDIDIKAN JEMBER) -->
+                <div class="card-preview" onclick="openCertModal(3)">
+                  <img src="cert4.jpg" alt="Peserta — Lomba Debat Indonesia (LDI) 2026" loading="lazy">
+                  <div class="card-preview-overlay">
+                    <span class="preview-hint">🔍 Klik untuk memperbesar</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- 🚀 TASK 2: WHAT THESE CERTIFICATES DEMONSTRATE SECTION -->
+        <div class="demonstrate-section">
+          <div class="demonstrate-header">
+            <span class="section-tag">VALUE PROPOSITION</span>
+            <h3 class="demonstrate-title-main">🚀 What These Certificates Demonstrate</h3>
+            <p class="demonstrate-subtitle-main">
+              Kombinasi kemampuan teknis hands-on dan soft skills penting yang siap diaplikasikan pada industri cybersecurity modern.
+            </p>
+          </div>
+
+          <div class="demonstrate-grid">
+            <div class="demonstrate-card">
+              <span class="demonstrate-icon">🔐</span>
+              <h4 class="demonstrate-title">Technical Skills</h4>
+              <p class="demonstrate-desc">Hands-on experience in penetration testing, CTF challenges, and web exploitation.</p>
+            </div>
+            <div class="demonstrate-card">
+              <span class="demonstrate-icon">🧠</span>
+              <h4 class="demonstrate-title">Problem Solving</h4>
+              <p class="demonstrate-desc">Proven ability to solve complex security problems under competition pressure.</p>
+            </div>
+            <div class="demonstrate-card">
+              <span class="demonstrate-icon">📡</span>
+              <h4 class="demonstrate-title">Industry Awareness</h4>
+              <p class="demonstrate-desc">Up-to-date with ethical hacking methodologies and OWASP standards.</p>
+            </div>
+            <div class="demonstrate-card">
+              <span class="demonstrate-icon">🗣️</span>
+              <h4 class="demonstrate-title">Communication</h4>
+              <p class="demonstrate-desc">Strong presentation and logical argumentation skills for vulnerability reporting.</p>
+            </div>
+          </div>
+        </div>
 
         </div>
       </div>
@@ -2647,9 +2803,10 @@
       });
       const visibleCount = document.querySelectorAll('.timeline-item.in-view').length;
       if (timelineProgress) {
-        if (visibleCount === 1) timelineProgress.style.height = '33%';
-        else if (visibleCount === 2) timelineProgress.style.height = '66%';
-        else if (visibleCount >= 3) timelineProgress.style.height = '100%';
+        if (visibleCount === 1) timelineProgress.style.height = '25%';
+        else if (visibleCount === 2) timelineProgress.style.height = '50%';
+        else if (visibleCount === 3) timelineProgress.style.height = '75%';
+        else if (visibleCount >= 4) timelineProgress.style.height = '100%';
       }
     }, { threshold: 0.2 });
     timelineItems.forEach(item => timelineObserver.observe(item));
@@ -2869,22 +3026,28 @@
     /* J. Certificates Modal Engine (With Strict Swap Validation) */
     const certsData = [
       {
-        title: "PENTEST EXPOSED — Webinar Participant",
-        issuer: "Issued by: Mata Hacker & Mata Siber · No. 039/MH-MS/PENTEST/IV/2026",
-        desc: "Successfully participating in the webinar 'PENTEST EXPOSED: How Hackers Find & Exploit Website Vulnerabilities' — Friday, August 7, 2026. Analisis serangan web, simulasi eksploitasi, dan remediasi keamanan.",
-        image: "cert3.jpg"
-      },
-      {
-        title: "Finalis — Jember Cyber Clash 2026",
-        issuer: "Issued by: Pemerintah Kabupaten Jember",
-        desc: "Finalis Peserta dalam Kompetisi Jember Cyber Clash 2026 Tingkat SMA/SMK/MA se-Kabupaten Jember, diselenggarakan di Lantai 1 Gedung Jember Nusantara pada tanggal 1 Juli 2026.",
+        title: "3rd PLACE — Pentest Exposed Quiz Competition",
+        issuer: "Mata Hacker & Mata Siber",
+        desc: "Meraih Juara 3 dalam kompetisi yang menguji pemahaman mendalam tentang Penetration Testing dan Cybersecurity. Membuktikan kemampuan analisis kerentanan sistem, pemahaman metodologi ethical hacking, dan pengetahuan tentang OWASP Top 10 serta network security. Kompetensi yang langsung applicable untuk role Junior Penetration Tester atau Security Analyst.",
         image: "cert2.jpg"
       },
       {
-        title: "3rd PLACE — Pentest Exposed Quiz Competition",
-        issuer: "Issued by: Mata Hacker & Mata Siber",
-        desc: "Achieving 3rd PLACE in the Pentest Exposed Quiz Competition, demonstrating outstanding knowledge and understanding of Penetration Testing and Cybersecurity.",
+        title: "Finalis — Jember Cyber Clash 2026",
+        issuer: "Pemerintah Kabupaten Jember · Dinas Komunikasi dan Informatika",
+        desc: "Terpilih sebagai Finalis dalam Kompetisi Jember Cyber Clash 2026 Tingkat SMA/SMK/MA se-Kabupaten Jember. Kompetisi ini menguji kemampuan praktis dalam CTF (Capture The Flag), analisis forensik digital, web exploitation, dan network security. Mendemonstrasikan kemampuan problem-solving di bawah tekanan dan kesiapan untuk role Cybersecurity Analyst atau SOC Analyst. (No: 500.12.10.1/182.2.20/35.09.323/2026)",
+        image: "cert3.jpg"
+      },
+      {
+        title: "PENTEST EXPOSED — Webinar Participant",
+        issuer: "Mata Hacker & Mata Siber · Adiva Solution",
+        desc: "Partisipasi aktif dalam webinar eksklusif 'PENTEST EXPOSED: How Hackers Find & Exploit Website Vulnerabilities'. Materi mencakup reconnaissance techniques, vulnerability scanning, SQL injection, XSS, CSRF, dan remediation strategies. Memperkuat pemahaman tentang offensive security methodology dan industry best practices untuk role Application Security Engineer atau Web Penetration Tester. (No: 039/MH-MS/PENTEST/IV/2026)",
         image: "cert1.jpg"
+      },
+      {
+        title: "Peserta — Lomba Debat Indonesia (LDI) 2026",
+        issuer: "Cabang Dinas Pendidikan Provinsi Jawa Timur Wilayah Jember",
+        desc: "Berpartisipasi dalam Lomba Debat Indonesia (LDI) 2026 Bidang Bahasa Indonesia Tingkat SMA/SMK/MA se-Kabupaten Jember. Kompetisi ini mengasah kemampuan critical thinking, public speaking, argumentasi logis, dan analisis masalah secara terstruktur. Soft skills yang sangat dicari di dunia cybersecurity untuk vulnerability reporting, presentasi kepada stakeholder, dan kolaborasi tim. (No: 400.3.2/641/101.6.5/2026)",
+        image: "cert4.jpg"
       }
     ];
 
